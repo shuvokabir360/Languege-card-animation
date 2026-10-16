@@ -838,6 +838,85 @@ body {
   transform: translateX(-50%) translateY(0);
 }
 
+/* ========================================================
+   Clean Screenshot Rendering Styles (Fix html2canvas bugs)
+   ======================================================== */
+.capturing-screenshot .sentence-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+  border-width: 1.5px !important;
+}
+
+.capturing-screenshot .sentence-card::before {
+  display: none !important; /* Removes distorted pseudo-sheen in html2canvas */
+}
+
+.capturing-screenshot .theme-coral {
+  background: #fff1f2 !important;
+  border-color: #fecdd3 !important;
+}
+
+.capturing-screenshot .theme-emerald {
+  background: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+}
+
+.capturing-screenshot .theme-blue {
+  background: #eff6ff !important;
+  border-color: #bfdbfe !important;
+}
+
+.capturing-screenshot .theme-amber {
+  background: #fffbeb !important;
+  border-color: #fde68a !important;
+}
+
+.capturing-screenshot .theme-purple {
+  background: #faf5ff !important;
+  border-color: #e9d5ff !important;
+}
+
+.capturing-screenshot .theme-teal {
+  background: #f0fdfa !important;
+  border-color: #99f6e4 !important;
+}
+
+/* Home cards clean rendering */
+.capturing-screenshot .lang-select-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4) !important;
+}
+
+.capturing-screenshot .card-hindi {
+  background: #fff1f2 !important;
+  border-color: #fca5a5 !important;
+}
+
+.capturing-screenshot .card-english {
+  background: #eff6ff !important;
+  border-color: #93c5fd !important;
+}
+
+.capturing-screenshot .card-chinese {
+  background: #fef2f2 !important;
+  border-color: #f87171 !important;
+}
+
+.capturing-screenshot .card-arabic {
+  background: #ecfdf5 !important;
+  border-color: #6ee7b7 !important;
+}
+
+.capturing-screenshot .page-badge,
+.capturing-screenshot .brand-icon,
+.capturing-screenshot .home-icon-circle,
+.capturing-screenshot .home-badge-pill {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 /* Mobile responsive full viewport support */
 @media (max-width: 480px) {
   body {
