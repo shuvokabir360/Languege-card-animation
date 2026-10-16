@@ -650,6 +650,45 @@ body {
   transform: scale(0.95);
 }
 
+/* PWA Install Button */
+.install-pwa-btn {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 20px;
+  font-family: 'Tiro Bangla', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.45);
+  transition: all 0.25s ease;
+  animation: pulse-install 2s infinite ease-in-out;
+}
+
+.install-pwa-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+}
+
+.install-pwa-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@keyframes pulse-install {
+  0%, 100% {
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 22px rgba(96, 165, 250, 0.75);
+  }
+}
+
 /* Mobile responsive full viewport support */
 @media (max-width: 480px) {
   body {

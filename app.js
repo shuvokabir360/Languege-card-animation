@@ -1,6 +1,11 @@
+// ========================================================
+// 0. SERVICE WORKER REGISTRATION (PWA Support)
+// ========================================================
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(regs => {
-    for (let r of regs) r.unregister();
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('Service Worker registered with scope:', reg.scope))
+      .catch(err => console.log('Service Worker registration skipped or failed:', err));
   });
 }
 
@@ -324,3 +329,38 @@ playBtn.addEventListener('click', togglePlay);
 // Global Exposure for HTML onclick
 window.openLanguage = openLanguage;
 window.goToHome = goToHome;
+
+// ========================================================
+// 5. PWA "ADD TO HOME SCREEN" INSTALLATION
+// ========================================================
+let deferredInstallPrompt = null;
+const installAppBtn = document.getElementById('installAppBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  if (installAppBtn) {
+    installAppBtn.style.display = 'inline-flex';
+  }
+});
+
+if (installAppBtn) {
+  installAppBtn.addEventListener('click', async () => {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    const choiceResult = await deferredInstallPrompt.userChoice;
+    if (choiceResult.outcome === 'accepted') {
+      console.log('User accepted the PWA install prompt');
+    }
+    deferredInstallPrompt = null;
+    installAppBtn.style.display = 'none';
+  });
+}
+
+window.addEventListener('appinstalled', () => {
+  if (installAppBtn) {
+    installAppBtn.style.display = 'none';
+  }
+  console.log('Language Learning App installed successfully!');
+});
+
