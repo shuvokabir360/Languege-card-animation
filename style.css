@@ -917,6 +917,550 @@ body {
   -webkit-backdrop-filter: none !important;
 }
 
+/* ========================================================
+   HOME SETTINGS BUTTON & 20 BACKGROUND EFFECT PRESETS
+   ======================================================== */
+.home-header {
+  position: relative;
+}
+
+.home-settings-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  z-index: 15;
+}
+
+.home-settings-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(30deg) scale(1.08);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.home-settings-btn:active {
+  transform: scale(0.92);
+}
+
+/* Settings Modal Overlay */
+.settings-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(4, 10, 24, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0.28s;
+  visibility: hidden;
+}
+
+.settings-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Modal Bottom Drawer Card */
+.settings-modal-card {
+  width: 100%;
+  max-height: 85%;
+  background: linear-gradient(180deg, #0d1b33 0%, #081120 100%);
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-bottom: none;
+  box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  padding: 18px 18px 22px;
+  transform: translateY(100%);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.settings-modal-overlay.active .settings-modal-card {
+  transform: translateY(0);
+}
+
+/* Settings Header */
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 10px;
+}
+
+.settings-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.settings-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #60a5fa;
+}
+
+.settings-modal-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.settings-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.settings-close-btn:hover {
+  background: rgba(239, 68, 68, 0.4);
+  border-color: rgba(239, 68, 68, 0.7);
+  transform: scale(1.08);
+}
+
+.settings-subtitle {
+  font-size: 12.5px;
+  color: #94a3b8;
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+
+/* Presets Grid (2 columns on mobile drawer) */
+.presets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 4px;
+  max-height: 48vh;
+}
+
+.presets-grid::-webkit-scrollbar {
+  width: 5px;
+}
+
+.presets-grid::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+
+/* Preset Item Card */
+.preset-card-item {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.preset-card-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.preset-card-item.active {
+  background: rgba(37, 99, 235, 0.28);
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.4), 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.preset-swatch {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.preset-card-item.active .preset-swatch::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 900;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.preset-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.preset-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preset-card-item.active .preset-name {
+  color: #93c5fd;
+}
+
+.preset-effect {
+  font-size: 10.5px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+/* Settings Footer */
+.settings-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 14px;
+  margin-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.settings-reset-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #cbd5e1;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settings-reset-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.settings-done-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.settings-done-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  transform: translateY(-1px);
+}
+
+/* ========================================================
+   20 DISTINCT BACKGROUND & EFFECT PRESETS (Applied to .mobile-frame)
+   ======================================================== */
+/* 1. রয়্যাল ব্লু (ডিফল্ট গ্রিড) */
+.mobile-frame.bg-preset-1 {
+  background-color: #081b3a !important;
+  background-image: 
+    radial-gradient(circle at 50% 25%, rgba(29, 78, 216, 0.35) 0%, transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px) !important;
+  background-size: 100% 100%, 22px 22px, 22px 22px !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
+}
+
+/* 2. মিডনাইট সাইবার */
+.mobile-frame.bg-preset-2 {
+  background-color: #030712 !important;
+  background-image: 
+    radial-gradient(rgba(6, 182, 212, 0.3) 1.5px, transparent 1.5px),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.3), transparent 60%) !important;
+  background-size: 18px 18px, 100% 100% !important;
+  border-color: rgba(6, 182, 212, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(6, 182, 212, 0.3) !important;
+}
+
+/* 3. পার্পল গ্যালাক্সি */
+.mobile-frame.bg-preset-3 {
+  background-color: #0f071e !important;
+  background-image: 
+    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.42) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.32) 0%, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 100%, 26px 26px, 26px 26px !important;
+  border-color: rgba(168, 85, 247, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(168, 85, 247, 0.35) !important;
+}
+
+/* 4. রয়্যাল এমারেল্ড */
+.mobile-frame.bg-preset-4 {
+  background-color: #022c22 !important;
+  background-image: 
+    radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.38) 0%, transparent 65%),
+    repeating-linear-gradient(45deg, rgba(52, 211, 153, 0.08) 0, rgba(52, 211, 153, 0.08) 1px, transparent 0, transparent 18px),
+    repeating-linear-gradient(-45deg, rgba(52, 211, 153, 0.08) 0, rgba(52, 211, 153, 0.08) 1px, transparent 0, transparent 18px) !important;
+  background-size: 100% 100%, 25px 25px, 25px 25px !important;
+  border-color: rgba(52, 211, 153, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(16, 185, 129, 0.35) !important;
+}
+
+/* 5. ওলেড ব্ল্যাক */
+.mobile-frame.bg-preset-5 {
+  background-color: #000000 !important;
+  background-image: 
+    radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.1) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 22px 22px, 22px 22px !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 0 3px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 6. সানসেট ভাইব্রেন্ট */
+.mobile-frame.bg-preset-6 {
+  background-color: #3b0716 !important;
+  background-image: 
+    radial-gradient(circle at 85% 15%, rgba(249, 115, 22, 0.45) 0%, transparent 60%),
+    radial-gradient(circle at 15% 85%, rgba(225, 29, 72, 0.4) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px) !important;
+  background-size: 100% 100%, 100% 100%, 24px 24px, 24px 24px !important;
+  border-color: rgba(251, 113, 133, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(244, 63, 94, 0.35) !important;
+}
+
+/* 7. ডিপ ওশান */
+.mobile-frame.bg-preset-7 {
+  background-color: #021a36 !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(56, 189, 248, 0.38) 0%, transparent 70%),
+    repeating-radial-gradient(circle at 50% 100%, rgba(14, 165, 233, 0.08) 0, rgba(14, 165, 233, 0.08) 12px, transparent 13px, transparent 24px) !important;
+  background-size: 100% 100%, 100% 100% !important;
+  border-color: rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(14, 165, 233, 0.35) !important;
+}
+
+/* 8. অরোরা বোরিয়ালিস */
+.mobile-frame.bg-preset-8 {
+  background-color: #031e17 !important;
+  background-image: 
+    radial-gradient(ellipse at top left, rgba(45, 212, 191, 0.42) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(34, 197, 94, 0.32) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px) !important;
+  background-size: 100% 100%, 100% 100%, 22px 22px, 22px 22px !important;
+  border-color: rgba(45, 212, 191, 0.45) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(20, 184, 166, 0.35) !important;
+}
+
+/* 9. রুবি ভেলভেট */
+.mobile-frame.bg-preset-9 {
+  background-color: #380808 !important;
+  background-image: 
+    radial-gradient(circle at 50% 25%, rgba(239, 68, 68, 0.42) 0%, transparent 65%),
+    linear-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px) !important;
+  background-size: 100% 100%, 24px 24px, 24px 24px !important;
+  border-color: rgba(248, 113, 113, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(220, 38, 38, 0.35) !important;
+}
+
+/* 10. গোল্ডেন লাক্সারি */
+.mobile-frame.bg-preset-10 {
+  background-color: #261704 !important;
+  background-image: 
+    radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.42) 0%, transparent 65%),
+    repeating-linear-gradient(45deg, rgba(251, 191, 36, 0.07) 0, rgba(251, 191, 36, 0.07) 1.5px, transparent 0, transparent 20px) !important;
+  background-size: 100% 100%, 28px 28px !important;
+  border-color: rgba(245, 158, 11, 0.45) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 3px rgba(217, 119, 6, 0.4) !important;
+}
+
+/* 11. আর্কটিক আইস */
+.mobile-frame.bg-preset-11 {
+  background-color: #081d33 !important;
+  background-image: 
+    radial-gradient(circle at 50% 15%, rgba(186, 230, 253, 0.32) 0%, transparent 65%),
+    linear-gradient(rgba(224, 242, 254, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(224, 242, 254, 0.1) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 20px 20px, 20px 20px !important;
+  border-color: rgba(186, 230, 253, 0.45) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 3px rgba(56, 189, 248, 0.4) !important;
+}
+
+/* 12. ম্যাট্রিক্স গ্রিন */
+.mobile-frame.bg-preset-12 {
+  background-color: #011409 !important;
+  background-image: 
+    radial-gradient(circle at 50% 25%, rgba(74, 222, 128, 0.32) 0%, transparent 70%),
+    linear-gradient(rgba(74, 222, 128, 0.13) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(74, 222, 128, 0.13) 1.5px, transparent 1.5px) !important;
+  background-size: 100% 100%, 18px 18px, 18px 18px !important;
+  border-color: rgba(74, 222, 128, 0.45) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 3px rgba(34, 197, 94, 0.35) !important;
+}
+
+/* 13. কসমিক নেবুলা */
+.mobile-frame.bg-preset-13 {
+  background-color: #150624 !important;
+  background-image: 
+    radial-gradient(circle at 75% 25%, rgba(217, 70, 239, 0.38) 0%, transparent 55%),
+    radial-gradient(circle at 25% 75%, rgba(99, 102, 241, 0.38) 0%, transparent 55%),
+    radial-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 100%, 28px 28px !important;
+  border-color: rgba(217, 70, 239, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(192, 38, 211, 0.35) !important;
+}
+
+/* 14. রোজ গোল্ড */
+.mobile-frame.bg-preset-14 {
+  background-color: #240e19 !important;
+  background-image: 
+    radial-gradient(circle at 50% 20%, rgba(244, 114, 182, 0.38) 0%, transparent 65%),
+    repeating-linear-gradient(60deg, rgba(251, 113, 133, 0.07) 0, rgba(251, 113, 133, 0.07) 1.5px, transparent 0, transparent 22px) !important;
+  background-size: 100% 100%, 30px 30px !important;
+  border-color: rgba(244, 114, 182, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(219, 39, 119, 0.35) !important;
+}
+
+/* 15. সায়ান টেকনো */
+.mobile-frame.bg-preset-15 {
+  background-color: #022222 !important;
+  background-image: 
+    radial-gradient(circle at 50% 30%, rgba(34, 211, 238, 0.38) 0%, transparent 65%),
+    linear-gradient(rgba(34, 211, 238, 0.12) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.12) 1.5px, transparent 1.5px) !important;
+  background-size: 100% 100%, 25px 25px, 25px 25px !important;
+  border-color: rgba(34, 211, 238, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(6, 182, 212, 0.35) !important;
+}
+
+/* 16. ড্রাগন লাভা */
+.mobile-frame.bg-preset-16 {
+  background-color: #2e0801 !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 100%, rgba(249, 115, 22, 0.48) 0%, transparent 65%),
+    radial-gradient(circle at 50% 20%, rgba(234, 88, 12, 0.35) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px) !important;
+  background-size: 100% 100%, 100% 100%, 22px 22px, 22px 22px !important;
+  border-color: rgba(249, 115, 22, 0.45) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(234, 88, 12, 0.4) !important;
+}
+
+/* 17. ডার্ক কার্বন */
+.mobile-frame.bg-preset-17 {
+  background-color: #111827 !important;
+  background-image: 
+    radial-gradient(circle at 50% 15%, rgba(156, 163, 175, 0.22) 0%, transparent 65%),
+    radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 12px 12px, 24px 24px !important;
+  background-position: 0 0, 0 0, 6px 6px !important;
+  border-color: rgba(156, 163, 175, 0.35) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 3px rgba(75, 85, 99, 0.35) !important;
+}
+
+/* 18. টুইলাইট ব্লুপ্রিন্ট */
+.mobile-frame.bg-preset-18 {
+  background-color: #09203a !important;
+  background-image: 
+    linear-gradient(rgba(141, 169, 196, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(141, 169, 196, 0.18) 1px, transparent 1px),
+    linear-gradient(rgba(141, 169, 196, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(141, 169, 196, 0.06) 1px, transparent 1px) !important;
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px !important;
+  border-color: rgba(141, 169, 196, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(19, 64, 116, 0.4) !important;
+}
+
+/* 19. হলো প্রিজম্যাটিক */
+.mobile-frame.bg-preset-19 {
+  background-color: #121324 !important;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(236, 72, 153, 0.32) 0%, transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.32) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.28) 0%, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px) !important;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 22px 22px, 22px 22px !important;
+  border-color: rgba(192, 132, 252, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(168, 85, 247, 0.35) !important;
+}
+
+/* 20. পাইন ফরেস্ট */
+.mobile-frame.bg-preset-20 {
+  background-color: #031b12 !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 25%, rgba(16, 185, 129, 0.38) 0%, transparent 65%),
+    radial-gradient(circle at 80% 80%, rgba(52, 211, 153, 0.22) 0%, transparent 50%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 0, transparent 16px) !important;
+  background-size: 100% 100%, 100% 100%, 20px 20px !important;
+  border-color: rgba(52, 211, 153, 0.4) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(5, 150, 105, 0.35) !important;
+}
+
 /* Mobile responsive full viewport support */
 @media (max-width: 480px) {
   body {

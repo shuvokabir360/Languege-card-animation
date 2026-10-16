@@ -488,7 +488,7 @@ async function takePageScreenshot() {
       scale: 2,
       useCORS: true,
       allowTaint: false,
-      backgroundColor: '#081b3a',
+      backgroundColor: window.getComputedStyle(appElement).backgroundColor || '#081b3a',
       logging: false,
       scrollX: 0,
       scrollY: 0,
@@ -536,6 +536,129 @@ async function takePageScreenshot() {
 if (screenshotBtn) {
   screenshotBtn.addEventListener('click', takePageScreenshot);
 }
+
+// ========================================================
+// 8. APP BACKGROUND & EFFECT PRESETS (20 টি প্রিসেট)
+// ========================================================
+const BG_PRESETS = [
+  { id: 1, name: 'রয়্যাল ব্লু', effect: 'ডিফল্ট গ্রিড', gradient: 'linear-gradient(135deg, #081b3a, #1d4ed8)', className: 'bg-preset-1' },
+  { id: 2, name: 'মিডনাইট সাইবার', effect: 'নিয়ন সায়ান ডটস', gradient: 'linear-gradient(135deg, #030712, #082f49, #06b6d4)', className: 'bg-preset-2' },
+  { id: 3, name: 'পার্পল গ্যালাক্সি', effect: 'কসমিক নেবুলা গ্লো', gradient: 'linear-gradient(135deg, #0f071e, #581c87, #a855f7)', className: 'bg-preset-3' },
+  { id: 4, name: 'রয়্যাল এমারেল্ড', effect: 'পান্না গ্রিন মেশ', gradient: 'linear-gradient(135deg, #022c22, #047857, #10b981)', className: 'bg-preset-4' },
+  { id: 5, name: 'ওলেড ব্ল্যাক', effect: 'পিওর ডার্ক গ্লো', gradient: 'linear-gradient(135deg, #000000, #18181b, #27272a)', className: 'bg-preset-5' },
+  { id: 6, name: 'সানসেট ভাইব্রেন্ট', effect: 'অ্যাম্বার ও পিঙ্ক রে', gradient: 'linear-gradient(135deg, #3b0716, #be123c, #f97316)', className: 'bg-preset-6' },
+  { id: 7, name: 'ডিপ ওশান', effect: 'নীল সমুদ্র রিবল', gradient: 'linear-gradient(135deg, #021a36, #0284c7, #38bdf8)', className: 'bg-preset-7' },
+  { id: 8, name: 'অরোরা ডান্স', effect: 'উত্তর মেরুর আলো', gradient: 'linear-gradient(135deg, #031e17, #0d9488, #2dd4bf)', className: 'bg-preset-8' },
+  { id: 9, name: 'রুবি ভেলভেট', effect: 'ক্রিমসন রেড গ্লো', gradient: 'linear-gradient(135deg, #380808, #991b1b, #ef4444)', className: 'bg-preset-9' },
+  { id: 10, name: 'গোল্ডেন লাক্সারি', effect: 'শিমারিং গোল্ডেন', gradient: 'linear-gradient(135deg, #261704, #b45309, #fbbf24)', className: 'bg-preset-10' },
+  { id: 11, name: 'আর্কটিক আইস', effect: 'হিমশীতল ক্রিস্টাল', gradient: 'linear-gradient(135deg, #081d33, #0284c7, #bae6fd)', className: 'bg-preset-11' },
+  { id: 12, name: 'ম্যাট্রিক্স গ্রিন', effect: 'সাইবার কোড গ্রিড', gradient: 'linear-gradient(135deg, #011409, #15803d, #4ade80)', className: 'bg-preset-12' },
+  { id: 13, name: 'কসমিক নেবুলা', effect: 'নক্ষত্রপুঞ্জ স্পার্কল', gradient: 'linear-gradient(135deg, #150624, #4a044e, #d946ef)', className: 'bg-preset-13' },
+  { id: 14, name: 'রোজ গোল্ড', effect: 'প্লাম ও পিঙ্ক অরা', gradient: 'linear-gradient(135deg, #240e19, #831843, #f472b6)', className: 'bg-preset-14' },
+  { id: 15, name: 'সায়ান টেকনো', effect: 'ইলেকট্রিক সার্কিট', gradient: 'linear-gradient(135deg, #022222, #0e7490, #22d3ee)', className: 'bg-preset-15' },
+  { id: 16, name: 'ড্রাগন লাভা', effect: 'উত্তপ্ত লাভা ফ্লেয়ার', gradient: 'linear-gradient(135deg, #2e0801, #c2410c, #f97316)', className: 'bg-preset-16' },
+  { id: 17, name: 'ডার্ক কার্বন', effect: 'কার্বন ফাইবার ম্যাট', gradient: 'linear-gradient(135deg, #111827, #1f2937, #4b5563)', className: 'bg-preset-17' },
+  { id: 18, name: 'টুইলাইট ব্লুপ্রিন্ট', effect: 'আর্কিটেক্ট গ্রিড', gradient: 'linear-gradient(135deg, #09203a, #134074, #8da9c4)', className: 'bg-preset-18' },
+  { id: 19, name: 'হলো প্রিজম্যাটিক', effect: 'রেইনবো স্পেকট্রাম', gradient: 'linear-gradient(135deg, #121324, #2b1d3d, #ec4899)', className: 'bg-preset-19' },
+  { id: 20, name: 'পাইন ফরেস্ট', effect: 'এভারগ্রিন নেচার মিস্ট', gradient: 'linear-gradient(135deg, #031b12, #064e3b, #10b981)', className: 'bg-preset-20' }
+];
+
+let currentBgPresetId = 1;
+const settingsModalOverlay = document.getElementById('settingsModalOverlay');
+const presetsGrid = document.getElementById('presetsGrid');
+
+function renderPresetsGrid() {
+  if (!presetsGrid) return;
+  presetsGrid.innerHTML = '';
+
+  BG_PRESETS.forEach(preset => {
+    const card = document.createElement('div');
+    card.className = `preset-card-item ${preset.id === currentBgPresetId ? 'active' : ''}`;
+    card.id = `presetItem-${preset.id}`;
+    card.onclick = () => applyBgPreset(preset.id);
+
+    card.innerHTML = `
+      <div class="preset-swatch" style="background: ${preset.gradient};"></div>
+      <div class="preset-info">
+        <span class="preset-name">${preset.id}. ${preset.name}</span>
+        <span class="preset-effect">${preset.effect}</span>
+      </div>
+    `;
+
+    presetsGrid.appendChild(card);
+  });
+}
+
+function applyBgPreset(presetId) {
+  const appElement = document.getElementById('app');
+  if (!appElement) return;
+
+  currentBgPresetId = presetId;
+
+  // Remove existing preset classes
+  for (let i = 1; i <= 20; i++) {
+    appElement.classList.remove(`bg-preset-${i}`);
+  }
+
+  // Add selected preset class
+  appElement.classList.add(`bg-preset-${presetId}`);
+
+  // Persist choice to localStorage
+  try {
+    localStorage.setItem('app_bg_preset', presetId.toString());
+  } catch (e) {
+    console.warn('Could not save theme preference:', e);
+  }
+
+  // Update active state in presets list
+  document.querySelectorAll('.preset-card-item').forEach(item => {
+    item.classList.remove('active');
+  });
+  const activeItem = document.getElementById(`presetItem-${presetId}`);
+  if (activeItem) {
+    activeItem.classList.add('active');
+  }
+}
+
+function openSettingsModal() {
+  if (!settingsModalOverlay) return;
+  renderPresetsGrid();
+  settingsModalOverlay.classList.add('active');
+}
+
+function closeSettingsModal(event) {
+  if (!settingsModalOverlay) return;
+  if (event && event.target !== settingsModalOverlay && !event.target.classList.contains('settings-close-btn') && !event.target.classList.contains('settings-done-btn')) {
+    return;
+  }
+  settingsModalOverlay.classList.remove('active');
+}
+
+function resetDefaultTheme() {
+  applyBgPreset(1);
+}
+
+// Expose functions globally for HTML inline handlers
+window.openSettingsModal = openSettingsModal;
+window.closeSettingsModal = closeSettingsModal;
+window.applyBgPreset = applyBgPreset;
+window.resetDefaultTheme = resetDefaultTheme;
+
+// Initialize saved background preset on startup
+(function initAppBackground() {
+  try {
+    const saved = localStorage.getItem('app_bg_preset');
+    const presetId = saved ? parseInt(saved, 10) : 1;
+    if (presetId >= 1 && presetId <= 20) {
+      applyBgPreset(presetId);
+    } else {
+      applyBgPreset(1);
+    }
+  } catch (e) {
+    applyBgPreset(1);
+  }
+})();
+
 
 
 

@@ -1,11 +1,11 @@
-const CACHE_NAME = 'lang-app-cache-v6';
+const CACHE_NAME = 'lang-app-cache-v7';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
-  './style.css?v=7',
+  './style.css?v=8',
   './app.js',
-  './app.js?v=10',
+  './app.js?v=11',
   './html2canvas.min.js',
   './data_hindi.js',
   './data_hindi.js?v=1',
