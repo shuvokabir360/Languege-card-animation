@@ -455,4 +455,75 @@ if (mobileAppFrame) {
   window.addEventListener('mouseup', handleTouchEnd);
 }
 
+// ========================================================
+// 7. JPEG SCREENSHOT CAPTURE (স্ক্রিনশট নেওয়ার সময় বাটনটি হাইড থাকবে)
+// ========================================================
+const screenshotBtn = document.getElementById('screenshotBtn');
+const screenshotToast = document.getElementById('screenshotToast');
+
+async function takePageScreenshot() {
+  if (!window.html2canvas) {
+    alert("স্ক্রিনশট ইঞ্জিন প্রস্তুত হচ্ছে, অনুগ্রহ করে ১ সেকেন্ড পর আবার চেষ্টা করুন।");
+    return;
+  }
+
+  const appElement = document.getElementById('app');
+  if (!appElement) return;
+
+  // 1. Hide the screenshot button and any no-screenshot elements before capture
+  const elementsToHide = document.querySelectorAll('.no-screenshot');
+  elementsToHide.forEach(el => el.classList.add('hide-during-screenshot'));
+
+  // Also ensure pull to refresh is closed
+  if (typeof resetPullIndicator === 'function') {
+    resetPullIndicator();
+  }
+
+  try {
+    // 2. Capture the mobile app frame using html2canvas (2x scale for crisp HD quality)
+    const canvas = await html2canvas(appElement, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#081b3a',
+      logging: false
+    });
+
+    // 3. Convert canvas to JPEG format
+    const jpegDataUrl = canvas.toDataURL('image/jpeg', 0.95);
+
+    // 4. Generate clean filename based on current language & timestamp
+    const now = new Date();
+    const timeStr = `${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
+    const filename = `Language-App-${currentLangKey || 'page'}-${timeStr}.jpg`;
+
+    // 5. Trigger download
+    const downloadLink = document.createElement('a');
+    downloadLink.href = jpegDataUrl;
+    downloadLink.download = filename;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
+    // 6. Show success toast notification
+    if (screenshotToast) {
+      screenshotToast.classList.add('show');
+      setTimeout(() => {
+        screenshotToast.classList.remove('show');
+      }, 2600);
+    }
+  } catch (err) {
+    console.error('Screenshot capture failed:', err);
+    alert('স্ক্রিনশট নিতে সমস্যা হয়েছে: ' + err.message);
+  } finally {
+    // 7. ALWAYS un-hide the screenshot button and elements
+    elementsToHide.forEach(el => el.classList.remove('hide-during-screenshot'));
+  }
+}
+
+if (screenshotBtn) {
+  screenshotBtn.addEventListener('click', takePageScreenshot);
+}
+
+
 

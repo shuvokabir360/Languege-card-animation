@@ -229,13 +229,28 @@
         </footer>
       </section>
 
+      <!-- Floating Screenshot Button (Hidden during capture) -->
+      <button class="screenshot-fab-btn no-screenshot" id="screenshotBtn" title="পেইজের স্ক্রিনশট (JPEG) নিন">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+          <circle cx="12" cy="13" r="4"></circle>
+        </svg>
+        <span class="screenshot-fab-text">স্ক্রিনশট</span>
+      </button>
+
+      <!-- Toast Notification for Screenshot -->
+      <div class="screenshot-toast no-screenshot" id="screenshotToast">
+        📸 পেইজ স্ক্রিনশট (JPEG) সফলভাবে সেভ হয়েছে!
+      </div>
+
     </main>
   </div>
 
+  <script src="html2canvas.min.js"></script>
   <script src="data_hindi.js?v=1"></script>
   <script src="data_english.js?v=1"></script>
   <script src="data_chinese.js?v=1"></script>
   <script src="data_arabic.js?v=1"></script>
-  <script src="app.js?v=8"></script>
+  <script src="app.js?v=9"></script>
 </body>
 </html>
