@@ -175,6 +175,33 @@ body {
   white-space: nowrap;
 }
 
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-bar-settings-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.top-bar-settings-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(30deg) scale(1.08);
+}
+
 /* 6 Sentences Page Container - Evenly Distributed to Fill Full Screen */
 .sentences-page-container {
   flex: 1;
@@ -316,69 +343,69 @@ body {
    5 Distinct Highlighted Glossy Backgrounds for the 5 Sentences
    ======================================================== */
 
-/* Card 1: Warm Crimson / Rose Gloss */
+/* Card 1: Warm Crimson / Rose Gloss (or Theme Matched) */
 .theme-coral {
-  background: linear-gradient(135deg, rgba(255, 245, 245, 0.95) 0%, rgba(255, 228, 230, 0.88) 100%);
-  border-color: rgba(255, 205, 210, 0.9);
+  background: var(--card-1-bg, linear-gradient(135deg, rgba(255, 245, 245, 0.95) 0%, rgba(255, 228, 230, 0.88) 100%));
+  border-color: var(--card-1-border, rgba(255, 205, 210, 0.9));
 }
 
 .theme-coral .card-num {
-  background: #d32f2f;
+  background: var(--card-1-num, #d32f2f);
   color: #ffffff;
 }
 
-/* Card 2: Fresh Emerald / Mint Green Gloss */
+/* Card 2: Fresh Emerald / Mint Green Gloss (or Theme Matched) */
 .theme-emerald {
-  background: linear-gradient(135deg, rgba(240, 253, 244, 0.95) 0%, rgba(220, 252, 231, 0.88) 100%);
-  border-color: rgba(187, 247, 208, 0.9);
+  background: var(--card-2-bg, linear-gradient(135deg, rgba(240, 253, 244, 0.95) 0%, rgba(220, 252, 231, 0.88) 100%));
+  border-color: var(--card-2-border, rgba(187, 247, 208, 0.9));
 }
 
 .theme-emerald .card-num {
-  background: #16a34a;
+  background: var(--card-2-num, #16a34a);
   color: #ffffff;
 }
 
-/* Card 3: Deep Royal Blue / Cyan Gloss */
+/* Card 3: Deep Royal Blue / Cyan Gloss (or Theme Matched) */
 .theme-blue {
-  background: linear-gradient(135deg, rgba(239, 246, 255, 0.95) 0%, rgba(219, 234, 254, 0.88) 100%);
-  border-color: rgba(191, 219, 254, 0.9);
+  background: var(--card-3-bg, linear-gradient(135deg, rgba(239, 246, 255, 0.95) 0%, rgba(219, 234, 254, 0.88) 100%));
+  border-color: var(--card-3-border, rgba(191, 219, 254, 0.9));
 }
 
 .theme-blue .card-num {
-  background: #2563eb;
+  background: var(--card-3-num, #2563eb);
   color: #ffffff;
 }
 
-/* Card 4: Warm Honey / Amber Gold Gloss */
+/* Card 4: Warm Honey / Amber Gold Gloss (or Theme Matched) */
 .theme-amber {
-  background: linear-gradient(135deg, rgba(255, 251, 235, 0.95) 0%, rgba(254, 243, 199, 0.88) 100%);
-  border-color: rgba(253, 230, 138, 0.9);
+  background: var(--card-4-bg, linear-gradient(135deg, rgba(255, 251, 235, 0.95) 0%, rgba(254, 243, 199, 0.88) 100%));
+  border-color: var(--card-4-border, rgba(253, 230, 138, 0.9));
 }
 
 .theme-amber .card-num {
-  background: #d97706;
+  background: var(--card-4-num, #d97706);
   color: #ffffff;
 }
 
-/* Card 5: Royal Violet / Purple Lavender Gloss */
+/* Card 5: Royal Violet / Purple Lavender Gloss (or Theme Matched) */
 .theme-purple {
-  background: linear-gradient(135deg, rgba(250, 245, 255, 0.95) 0%, rgba(243, 232, 255, 0.88) 100%);
-  border-color: rgba(233, 213, 255, 0.9);
+  background: var(--card-5-bg, linear-gradient(135deg, rgba(250, 245, 255, 0.95) 0%, rgba(243, 232, 255, 0.88) 100%));
+  border-color: var(--card-5-border, rgba(233, 213, 255, 0.9));
 }
 
 .theme-purple .card-num {
-  background: #9333ea;
+  background: var(--card-5-num, #9333ea);
   color: #ffffff;
 }
 
-/* Card 6: Turquoise / Teal Cyan Gloss */
+/* Card 6: Turquoise / Teal Cyan Gloss (or Theme Matched) */
 .theme-teal {
-  background: linear-gradient(135deg, rgba(236, 253, 245, 0.95) 0%, rgba(204, 251, 241, 0.88) 100%);
-  border-color: rgba(153, 246, 228, 0.9);
+  background: var(--card-6-bg, linear-gradient(135deg, rgba(236, 253, 245, 0.95) 0%, rgba(204, 251, 241, 0.88) 100%));
+  border-color: var(--card-6-border, rgba(153, 246, 228, 0.9));
 }
 
 .theme-teal .card-num {
-  background: #0d9488;
+  background: var(--card-6-num, #0d9488);
   color: #ffffff;
 }
 
@@ -853,33 +880,33 @@ body {
 }
 
 .capturing-screenshot .theme-coral {
-  background: #fff1f2 !important;
-  border-color: #fecdd3 !important;
+  background: var(--card-1-bg, #fff1f2) !important;
+  border-color: var(--card-1-border, #fecdd3) !important;
 }
 
 .capturing-screenshot .theme-emerald {
-  background: #f0fdf4 !important;
-  border-color: #bbf7d0 !important;
+  background: var(--card-2-bg, #f0fdf4) !important;
+  border-color: var(--card-2-border, #bbf7d0) !important;
 }
 
 .capturing-screenshot .theme-blue {
-  background: #eff6ff !important;
-  border-color: #bfdbfe !important;
+  background: var(--card-3-bg, #eff6ff) !important;
+  border-color: var(--card-3-border, #bfdbfe) !important;
 }
 
 .capturing-screenshot .theme-amber {
-  background: #fffbeb !important;
-  border-color: #fde68a !important;
+  background: var(--card-4-bg, #fffbeb) !important;
+  border-color: var(--card-4-border, #fde68a) !important;
 }
 
 .capturing-screenshot .theme-purple {
-  background: #faf5ff !important;
-  border-color: #e9d5ff !important;
+  background: var(--card-5-bg, #faf5ff) !important;
+  border-color: var(--card-5-border, #e9d5ff) !important;
 }
 
 .capturing-screenshot .theme-teal {
-  background: #f0fdfa !important;
-  border-color: #99f6e4 !important;
+  background: var(--card-6-bg, #f0fdfa) !important;
+  border-color: var(--card-6-border, #99f6e4) !important;
 }
 
 /* Home cards clean rendering */
@@ -1316,11 +1343,77 @@ body {
 
 .settings-done-btn:hover {
   background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-  transform: translateY(-1px);
+  transform: transla/* ========================================================
+   OUTER PAGE BODY BACKGROUNDS FOR 20 PRESETS
+   ======================================================== */
+body {
+  transition: background 0.4s ease;
+}
+
+body.body-preset-1 {
+  background: radial-gradient(circle at 50% 40%, #0d2b63 0%, #081733 60%, #030814 100%) !important;
+}
+body.body-preset-2 {
+  background: radial-gradient(circle at 50% 40%, #083344 0%, #030712 60%, #000000 100%) !important;
+}
+body.body-preset-3 {
+  background: radial-gradient(circle at 50% 40%, #3b0764 0%, #17072b 60%, #080210 100%) !important;
+}
+body.body-preset-4 {
+  background: radial-gradient(circle at 50% 40%, #064e3b 0%, #022c22 60%, #01140e 100%) !important;
+}
+body.body-preset-5 {
+  background: radial-gradient(circle at 50% 40%, #1c1917 0%, #09090b 60%, #000000 100%) !important;
+}
+body.body-preset-6 {
+  background: radial-gradient(circle at 50% 40%, #881337 0%, #3b0716 60%, #150207 100%) !important;
+}
+body.body-preset-7 {
+  background: radial-gradient(circle at 50% 40%, #0369a1 0%, #022044 60%, #010f22 100%) !important;
+}
+body.body-preset-8 {
+  background: radial-gradient(circle at 50% 40%, #115e59 0%, #042f2e 60%, #011616 100%) !important;
+}
+body.body-preset-9 {
+  background: radial-gradient(circle at 50% 40%, #7f1d1d 0%, #3b0707 60%, #190101 100%) !important;
+}
+body.body-preset-10 {
+  background: radial-gradient(circle at 50% 40%, #78350f 0%, #351502 60%, #140801 100%) !important;
+}
+body.body-preset-11 {
+  background: radial-gradient(circle at 50% 40%, #0284c7 0%, #082846 60%, #021222 100%) !important;
+}
+body.body-preset-12 {
+  background: radial-gradient(circle at 50% 40%, #14532d 0%, #032311 60%, #011107 100%) !important;
+}
+body.body-preset-13 {
+  background: radial-gradient(circle at 50% 40%, #581c87 0%, #200438 60%, #0c0116 100%) !important;
+}
+body.body-preset-14 {
+  background: radial-gradient(circle at 50% 40%, #701a75 0%, #2e0930 60%, #130214 100%) !important;
+}
+body.body-preset-15 {
+  background: radial-gradient(circle at 50% 40%, #155e75 0%, #04252e 60%, #011217 100%) !important;
+}
+body.body-preset-16 {
+  background: radial-gradient(circle at 50% 40%, #7c2d12 0%, #380d02 60%, #180501 100%) !important;
+}
+body.body-preset-17 {
+  background: radial-gradient(circle at 50% 40%, #27272a 0%, #111827 60%, #030712 100%) !important;
+}
+body.body-preset-18 {
+  background: radial-gradient(circle at 50% 40%, #1e3a8a 0%, #0b1f44 60%, #040d1e 100%) !important;
+}
+body.body-preset-19 {
+  background: radial-gradient(circle at 50% 40%, #431407 0%, #1e1338 60%, #090a18 100%) !important;
+}
+body.body-preset-20 {
+  background: radial-gradient(circle at 50% 40%, #064e3b 0%, #022318 60%, #01120b 100%) !important;
 }
 
 /* ========================================================
    20 DISTINCT BACKGROUND & EFFECT PRESETS (Applied to .mobile-frame)
+   AND MATCHED SENTENCE CARD THEMES (--card-X-bg/border/num)
    ======================================================== */
 /* 1. রয়্যাল ব্লু (ডিফল্ট গ্রিড) */
 .mobile-frame.bg-preset-1 {
@@ -1332,6 +1425,24 @@ body {
   background-size: 100% 100%, 22px 22px, 22px 22px !important;
   border-color: rgba(255, 255, 255, 0.25) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(255, 245, 245, 0.96) 0%, rgba(255, 228, 230, 0.9) 100%);
+  --card-1-border: rgba(255, 205, 210, 0.9);
+  --card-1-num: #d32f2f;
+  --card-2-bg: linear-gradient(135deg, rgba(240, 253, 244, 0.96) 0%, rgba(220, 252, 231, 0.9) 100%);
+  --card-2-border: rgba(187, 247, 208, 0.9);
+  --card-2-num: #16a34a;
+  --card-3-bg: linear-gradient(135deg, rgba(239, 246, 255, 0.96) 0%, rgba(219, 234, 254, 0.9) 100%);
+  --card-3-border: rgba(191, 219, 254, 0.9);
+  --card-3-num: #2563eb;
+  --card-4-bg: linear-gradient(135deg, rgba(255, 251, 235, 0.96) 0%, rgba(254, 243, 199, 0.9) 100%);
+  --card-4-border: rgba(253, 230, 138, 0.9);
+  --card-4-num: #d97706;
+  --card-5-bg: linear-gradient(135deg, rgba(250, 245, 255, 0.96) 0%, rgba(243, 232, 255, 0.9) 100%);
+  --card-5-border: rgba(233, 213, 255, 0.9);
+  --card-5-num: #9333ea;
+  --card-6-bg: linear-gradient(135deg, rgba(236, 253, 245, 0.96) 0%, rgba(204, 251, 241, 0.9) 100%);
+  --card-6-border: rgba(153, 246, 228, 0.9);
+  --card-6-num: #0d9488;
 }
 
 /* 2. মিডনাইট সাইবার */
@@ -1343,6 +1454,24 @@ body {
   background-size: 18px 18px, 100% 100% !important;
   border-color: rgba(6, 182, 212, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(6, 182, 212, 0.3) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(236, 254, 255, 0.96) 0%, rgba(207, 250, 254, 0.9) 100%);
+  --card-1-border: #67e8f9;
+  --card-1-num: #0891b2;
+  --card-2-bg: linear-gradient(135deg, rgba(240, 249, 255, 0.96) 0%, rgba(224, 242, 254, 0.9) 100%);
+  --card-2-border: #7dd3fc;
+  --card-2-num: #0284c7;
+  --card-3-bg: linear-gradient(135deg, rgba(236, 253, 245, 0.96) 0%, rgba(209, 250, 229, 0.9) 100%);
+  --card-3-border: #6ee7b7;
+  --card-3-num: #059669;
+  --card-4-bg: linear-gradient(135deg, rgba(248, 250, 252, 0.96) 0%, rgba(226, 232, 240, 0.9) 100%);
+  --card-4-border: #94a3b8;
+  --card-4-num: #334155;
+  --card-5-bg: linear-gradient(135deg, rgba(224, 242, 254, 0.96) 0%, rgba(186, 230, 253, 0.9) 100%);
+  --card-5-border: #38bdf8;
+  --card-5-num: #0369a1;
+  --card-6-bg: linear-gradient(135deg, rgba(240, 253, 250, 0.96) 0%, rgba(204, 251, 241, 0.9) 100%);
+  --card-6-border: #5eead4;
+  --card-6-num: #0d9488;
 }
 
 /* 3. পার্পল গ্যালাক্সি */
@@ -1356,6 +1485,24 @@ body {
   background-size: 100% 100%, 100% 100%, 26px 26px, 26px 26px !important;
   border-color: rgba(168, 85, 247, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(168, 85, 247, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(250, 245, 255, 0.96) 0%, rgba(243, 232, 255, 0.9) 100%);
+  --card-1-border: #d8b4fe;
+  --card-1-num: #9333ea;
+  --card-2-bg: linear-gradient(135deg, rgba(253, 244, 255, 0.96) 0%, rgba(250, 232, 255, 0.9) 100%);
+  --card-2-border: #f0abfc;
+  --card-2-num: #c026d3;
+  --card-3-bg: linear-gradient(135deg, rgba(245, 243, 255, 0.96) 0%, rgba(237, 233, 254, 0.9) 100%);
+  --card-3-border: #c4b5fd;
+  --card-3-num: #7c3aed;
+  --card-4-bg: linear-gradient(135deg, rgba(253, 242, 248, 0.96) 0%, rgba(252, 231, 243, 0.9) 100%);
+  --card-4-border: #fbcfe8;
+  --card-4-num: #db2777;
+  --card-5-bg: linear-gradient(135deg, rgba(238, 242, 255, 0.96) 0%, rgba(224, 231, 255, 0.9) 100%);
+  --card-5-border: #a5b4fc;
+  --card-5-num: #4f46e5;
+  --card-6-bg: linear-gradient(135deg, rgba(250, 232, 255, 0.96) 0%, rgba(245, 208, 254, 0.9) 100%);
+  --card-6-border: #e879f9;
+  --card-6-num: #a855f7;
 }
 
 /* 4. রয়্যাল এমারেল্ড */
@@ -1368,6 +1515,24 @@ body {
   background-size: 100% 100%, 25px 25px, 25px 25px !important;
   border-color: rgba(52, 211, 153, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(16, 185, 129, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(236, 253, 245, 0.96) 0%, rgba(209, 250, 229, 0.9) 100%);
+  --card-1-border: #a7f3d0;
+  --card-1-num: #059669;
+  --card-2-bg: linear-gradient(135deg, rgba(240, 253, 244, 0.96) 0%, rgba(220, 252, 231, 0.9) 100%);
+  --card-2-border: #86efac;
+  --card-2-num: #16a34a;
+  --card-3-bg: linear-gradient(135deg, rgba(247, 254, 231, 0.96) 0%, rgba(236, 252, 203, 0.9) 100%);
+  --card-3-border: #bef264;
+  --card-3-num: #65a30d;
+  --card-4-bg: linear-gradient(135deg, rgba(220, 252, 231, 0.96) 0%, rgba(187, 247, 208, 0.9) 100%);
+  --card-4-border: #4ade80;
+  --card-4-num: #15803d;
+  --card-5-bg: linear-gradient(135deg, rgba(240, 253, 250, 0.96) 0%, rgba(204, 251, 241, 0.9) 100%);
+  --card-5-border: #99f6e4;
+  --card-5-num: #0d9488;
+  --card-6-bg: linear-gradient(135deg, rgba(230, 255, 250, 0.96) 0%, rgba(153, 246, 228, 0.9) 100%);
+  --card-6-border: #5eead4;
+  --card-6-num: #047857;
 }
 
 /* 5. ওলেড ব্ল্যাক */
@@ -1380,6 +1545,24 @@ body {
   background-size: 100% 100%, 22px 22px, 22px 22px !important;
   border-color: rgba(255, 255, 255, 0.24) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 0 3px rgba(255, 255, 255, 0.2) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(248, 250, 252, 0.96) 0%, rgba(226, 232, 240, 0.9) 100%);
+  --card-1-border: #cbd5e1;
+  --card-1-num: #334155;
+  --card-2-bg: linear-gradient(135deg, rgba(241, 245, 249, 0.96) 0%, rgba(203, 213, 225, 0.9) 100%);
+  --card-2-border: #94a3b8;
+  --card-2-num: #475569;
+  --card-3-bg: linear-gradient(135deg, rgba(244, 244, 245, 0.96) 0%, rgba(228, 228, 231, 0.9) 100%);
+  --card-3-border: #a1a1aa;
+  --card-3-num: #52525b;
+  --card-4-bg: linear-gradient(135deg, rgba(250, 250, 250, 0.96) 0%, rgba(228, 228, 231, 0.9) 100%);
+  --card-4-border: #d4d4d8;
+  --card-4-num: #3f3f46;
+  --card-5-bg: linear-gradient(135deg, rgba(226, 232, 240, 0.96) 0%, rgba(203, 213, 225, 0.9) 100%);
+  --card-5-border: #94a3b8;
+  --card-5-num: #1e293b;
+  --card-6-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(241, 245, 249, 0.9) 100%);
+  --card-6-border: #e2e8f0;
+  --card-6-num: #0f172a;
 }
 
 /* 6. সানসেট ভাইব্রেন্ট */
@@ -1393,6 +1576,24 @@ body {
   background-size: 100% 100%, 100% 100%, 24px 24px, 24px 24px !important;
   border-color: rgba(251, 113, 133, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(244, 63, 94, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(255, 241, 242, 0.96) 0%, rgba(254, 205, 211, 0.9) 100%);
+  --card-1-border: #fca5a5;
+  --card-1-num: #e11d48;
+  --card-2-bg: linear-gradient(135deg, rgba(255, 247, 237, 0.96) 0%, rgba(254, 215, 170, 0.9) 100%);
+  --card-2-border: #fdba74;
+  --card-2-num: #ea580c;
+  --card-3-bg: linear-gradient(135deg, rgba(255, 251, 235, 0.96) 0%, rgba(254, 240, 138, 0.9) 100%);
+  --card-3-border: #fcd34d;
+  --card-3-num: #d97706;
+  --card-4-bg: linear-gradient(135deg, rgba(253, 242, 248, 0.96) 0%, rgba(251, 207, 232, 0.9) 100%);
+  --card-4-border: #f472b6;
+  --card-4-num: #be185d;
+  --card-5-bg: linear-gradient(135deg, rgba(255, 237, 213, 0.96) 0%, rgba(253, 186, 116, 0.9) 100%);
+  --card-5-border: #fb923c;
+  --card-5-num: #c2410c;
+  --card-6-bg: linear-gradient(135deg, rgba(255, 228, 230, 0.96) 0%, rgba(251, 113, 133, 0.9) 100%);
+  --card-6-border: #fb7185;
+  --card-6-num: #be123c;
 }
 
 /* 7. ডিপ ওশান */
@@ -1404,6 +1605,24 @@ body {
   background-size: 100% 100%, 100% 100% !important;
   border-color: rgba(56, 189, 248, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(14, 165, 233, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(240, 249, 255, 0.96) 0%, rgba(224, 242, 254, 0.9) 100%);
+  --card-1-border: #bae6fd;
+  --card-1-num: #0284c7;
+  --card-2-bg: linear-gradient(135deg, rgba(239, 246, 255, 0.96) 0%, rgba(219, 234, 254, 0.9) 100%);
+  --card-2-border: #93c5fd;
+  --card-2-num: #1d4ed8;
+  --card-3-bg: linear-gradient(135deg, rgba(224, 242, 254, 0.96) 0%, rgba(186, 230, 253, 0.9) 100%);
+  --card-3-border: #38bdf8;
+  --card-3-num: #0369a1;
+  --card-4-bg: linear-gradient(135deg, rgba(236, 254, 255, 0.96) 0%, rgba(207, 250, 254, 0.9) 100%);
+  --card-4-border: #a5f3fc;
+  --card-4-num: #0891b2;
+  --card-5-bg: linear-gradient(135deg, rgba(219, 234, 254, 0.96) 0%, rgba(191, 219, 254, 0.9) 100%);
+  --card-5-border: #60a5fa;
+  --card-5-num: #2563eb;
+  --card-6-bg: linear-gradient(135deg, rgba(240, 253, 250, 0.96) 0%, rgba(204, 251, 241, 0.9) 100%);
+  --card-6-border: #99f6e4;
+  --card-6-num: #0f766e;
 }
 
 /* 8. অরোরা বোরিয়ালিস */
@@ -1417,6 +1636,24 @@ body {
   background-size: 100% 100%, 100% 100%, 22px 22px, 22px 22px !important;
   border-color: rgba(45, 212, 191, 0.45) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(20, 184, 166, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(236, 254, 255, 0.96) 0%, rgba(207, 250, 254, 0.9) 100%);
+  --card-1-border: #67e8f9;
+  --card-1-num: #0e7490;
+  --card-2-bg: linear-gradient(135deg, rgba(240, 253, 244, 0.96) 0%, rgba(220, 252, 231, 0.9) 100%);
+  --card-2-border: #86efac;
+  --card-2-num: #15803d;
+  --card-3-bg: linear-gradient(135deg, rgba(240, 253, 250, 0.96) 0%, rgba(204, 251, 241, 0.9) 100%);
+  --card-3-border: #5eead4;
+  --card-3-num: #0f766e;
+  --card-4-bg: linear-gradient(135deg, rgba(230, 255, 250, 0.96) 0%, rgba(153, 246, 228, 0.9) 100%);
+  --card-4-border: #99f6e4;
+  --card-4-num: #0d9488;
+  --card-5-bg: linear-gradient(135deg, rgba(220, 252, 231, 0.96) 0%, rgba(187, 247, 208, 0.9) 100%);
+  --card-5-border: #4ade80;
+  --card-5-num: #16a34a;
+  --card-6-bg: linear-gradient(135deg, rgba(204, 251, 241, 0.96) 0%, rgba(153, 246, 228, 0.9) 100%);
+  --card-6-border: #2dd4bf;
+  --card-6-num: #047857;
 }
 
 /* 9. রুবি ভেলভেট */
@@ -1429,6 +1666,24 @@ body {
   background-size: 100% 100%, 24px 24px, 24px 24px !important;
   border-color: rgba(248, 113, 113, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(220, 38, 38, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(255, 241, 242, 0.96) 0%, rgba(254, 205, 211, 0.9) 100%);
+  --card-1-border: #fda4af;
+  --card-1-num: #be123c;
+  --card-2-bg: linear-gradient(135deg, rgba(254, 226, 226, 0.96) 0%, rgba(254, 202, 202, 0.9) 100%);
+  --card-2-border: #fca5a5;
+  --card-2-num: #dc2626;
+  --card-3-bg: linear-gradient(135deg, rgba(255, 228, 230, 0.96) 0%, rgba(251, 113, 133, 0.9) 100%);
+  --card-3-border: #fb7185;
+  --card-3-num: #b91c1c;
+  --card-4-bg: linear-gradient(135deg, rgba(253, 242, 248, 0.96) 0%, rgba(251, 207, 232, 0.9) 100%);
+  --card-4-border: #f472b6;
+  --card-4-num: #db2777;
+  --card-5-bg: linear-gradient(135deg, rgba(255, 237, 240, 0.96) 0%, rgba(254, 202, 202, 0.9) 100%);
+  --card-5-border: #f87171;
+  --card-5-num: #991b1b;
+  --card-6-bg: linear-gradient(135deg, rgba(254, 242, 242, 0.96) 0%, rgba(254, 202, 202, 0.9) 100%);
+  --card-6-border: #fca5a5;
+  --card-6-num: #ef4444;
 }
 
 /* 10. গোল্ডেন লাক্সারি */
@@ -1440,6 +1695,24 @@ body {
   background-size: 100% 100%, 28px 28px !important;
   border-color: rgba(245, 158, 11, 0.45) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 3px rgba(217, 119, 6, 0.4) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(255, 251, 235, 0.96) 0%, rgba(254, 243, 199, 0.9) 100%);
+  --card-1-border: #fde68a;
+  --card-1-num: #b45309;
+  --card-2-bg: linear-gradient(135deg, rgba(254, 243, 199, 0.96) 0%, rgba(253, 230, 138, 0.9) 100%);
+  --card-2-border: #fcd34d;
+  --card-2-num: #d97706;
+  --card-3-bg: linear-gradient(135deg, rgba(255, 247, 237, 0.96) 0%, rgba(254, 215, 170, 0.9) 100%);
+  --card-3-border: #fed7aa;
+  --card-3-num: #c2410c;
+  --card-4-bg: linear-gradient(135deg, rgba(254, 252, 232, 0.96) 0%, rgba(254, 240, 138, 0.9) 100%);
+  --card-4-border: #fef08a;
+  --card-4-num: #ca8a04;
+  --card-5-bg: linear-gradient(135deg, rgba(255, 253, 240, 0.96) 0%, rgba(254, 249, 195, 0.9) 100%);
+  --card-5-border: #fde047;
+  --card-5-num: #a16207;
+  --card-6-bg: linear-gradient(135deg, rgba(255, 237, 213, 0.96) 0%, rgba(253, 186, 116, 0.9) 100%);
+  --card-6-border: #fba543;
+  --card-6-num: #b45309;
 }
 
 /* 11. আর্কটিক আইস */
@@ -1452,6 +1725,24 @@ body {
   background-size: 100% 100%, 20px 20px, 20px 20px !important;
   border-color: rgba(186, 230, 253, 0.45) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 3px rgba(56, 189, 248, 0.4) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(240, 249, 255, 0.96) 0%, rgba(224, 242, 254, 0.9) 100%);
+  --card-1-border: #bae6fd;
+  --card-1-num: #0284c7;
+  --card-2-bg: linear-gradient(135deg, rgba(224, 242, 254, 0.96) 0%, rgba(186, 230, 253, 0.9) 100%);
+  --card-2-border: #7dd3fc;
+  --card-2-num: #0369a1;
+  --card-3-bg: linear-gradient(135deg, rgba(239, 246, 255, 0.96) 0%, rgba(219, 234, 254, 0.9) 100%);
+  --card-3-border: #bfdbfe;
+  --card-3-num: #1d4ed8;
+  --card-4-bg: linear-gradient(135deg, rgba(236, 254, 255, 0.96) 0%, rgba(207, 250, 254, 0.9) 100%);
+  --card-4-border: #a5f3fc;
+  --card-4-num: #0891b2;
+  --card-5-bg: linear-gradient(135deg, rgba(248, 250, 252, 0.96) 0%, rgba(226, 232, 240, 0.9) 100%);
+  --card-5-border: #cbd5e1;
+  --card-5-num: #475569;
+  --card-6-bg: linear-gradient(135deg, rgba(219, 234, 254, 0.96) 0%, rgba(191, 219, 254, 0.9) 100%);
+  --card-6-border: #60a5fa;
+  --card-6-num: #2563eb;
 }
 
 /* 12. ম্যাট্রিক্স গ্রিন */
@@ -1464,6 +1755,24 @@ body {
   background-size: 100% 100%, 18px 18px, 18px 18px !important;
   border-color: rgba(74, 222, 128, 0.45) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 3px rgba(34, 197, 94, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(247, 254, 231, 0.96) 0%, rgba(217, 249, 157, 0.9) 100%);
+  --card-1-border: #a3e635;
+  --card-1-num: #4d7c0f;
+  --card-2-bg: linear-gradient(135deg, rgba(240, 253, 244, 0.96) 0%, rgba(187, 247, 208, 0.9) 100%);
+  --card-2-border: #4ade80;
+  --card-2-num: #15803d;
+  --card-3-bg: linear-gradient(135deg, rgba(236, 253, 245, 0.96) 0%, rgba(167, 243, 208, 0.9) 100%);
+  --card-3-border: #6ee7b7;
+  --card-3-num: #059669;
+  --card-4-bg: linear-gradient(135deg, rgba(220, 252, 231, 0.96) 0%, rgba(134, 239, 172, 0.9) 100%);
+  --card-4-border: #86efac;
+  --card-4-num: #16a34a;
+  --card-5-bg: linear-gradient(135deg, rgba(238, 251, 232, 0.96) 0%, rgba(187, 247, 208, 0.9) 100%);
+  --card-5-border: #bbf7d0;
+  --card-5-num: #22c55e;
+  --card-6-bg: linear-gradient(135deg, rgba(240, 253, 250, 0.96) 0%, rgba(153, 246, 228, 0.9) 100%);
+  --card-6-border: #5eead4;
+  --card-6-num: #047857;
 }
 
 /* 13. কসমিক নেবুলা */
@@ -1476,6 +1785,24 @@ body {
   background-size: 100% 100%, 100% 100%, 28px 28px !important;
   border-color: rgba(217, 70, 239, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(192, 38, 211, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(253, 244, 255, 0.96) 0%, rgba(245, 208, 254, 0.9) 100%);
+  --card-1-border: #f0abfc;
+  --card-1-num: #c026d3;
+  --card-2-bg: linear-gradient(135deg, rgba(238, 242, 255, 0.96) 0%, rgba(199, 210, 254, 0.9) 100%);
+  --card-2-border: #a5b4fc;
+  --card-2-num: #4f46e5;
+  --card-3-bg: linear-gradient(135deg, rgba(250, 245, 255, 0.96) 0%, rgba(233, 213, 255, 0.9) 100%);
+  --card-3-border: #d8b4fe;
+  --card-3-num: #9333ea;
+  --card-4-bg: linear-gradient(135deg, rgba(253, 242, 248, 0.96) 0%, rgba(251, 207, 232, 0.9) 100%);
+  --card-4-border: #f472b6;
+  --card-4-num: #db2777;
+  --card-5-bg: linear-gradient(135deg, rgba(245, 243, 255, 0.96) 0%, rgba(221, 214, 254, 0.9) 100%);
+  --card-5-border: #c4b5fd;
+  --card-5-num: #7c3aed;
+  --card-6-bg: linear-gradient(135deg, rgba(250, 232, 255, 0.96) 0%, rgba(240, 171, 252, 0.9) 100%);
+  --card-6-border: #e879f9;
+  --card-6-num: #a855f7;
 }
 
 /* 14. রোজ গোল্ড */
@@ -1487,6 +1814,24 @@ body {
   background-size: 100% 100%, 30px 30px !important;
   border-color: rgba(244, 114, 182, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(219, 39, 119, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(253, 242, 248, 0.96) 0%, rgba(252, 231, 243, 0.9) 100%);
+  --card-1-border: #fbcfe8;
+  --card-1-num: #be185d;
+  --card-2-bg: linear-gradient(135deg, rgba(250, 245, 255, 0.96) 0%, rgba(243, 232, 255, 0.9) 100%);
+  --card-2-border: #e9d5ff;
+  --card-2-num: #9333ea;
+  --card-3-bg: linear-gradient(135deg, rgba(255, 241, 242, 0.96) 0%, rgba(254, 205, 211, 0.9) 100%);
+  --card-3-border: #fecdd3;
+  --card-3-num: #e11d48;
+  --card-4-bg: linear-gradient(135deg, rgba(252, 231, 243, 0.96) 0%, rgba(251, 207, 232, 0.9) 100%);
+  --card-4-border: #f472b6;
+  --card-4-num: #db2777;
+  --card-5-bg: linear-gradient(135deg, rgba(255, 247, 237, 0.96) 0%, rgba(254, 215, 170, 0.9) 100%);
+  --card-5-border: #fed7aa;
+  --card-5-num: #c2410c;
+  --card-6-bg: linear-gradient(135deg, rgba(245, 243, 255, 0.96) 0%, rgba(237, 233, 254, 0.9) 100%);
+  --card-6-border: #ddd6fe;
+  --card-6-num: #7e22ce;
 }
 
 /* 15. সায়ান টেকনো */
@@ -1499,6 +1844,24 @@ body {
   background-size: 100% 100%, 25px 25px, 25px 25px !important;
   border-color: rgba(34, 211, 238, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(6, 182, 212, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(236, 254, 255, 0.96) 0%, rgba(207, 250, 254, 0.9) 100%);
+  --card-1-border: #67e8f9;
+  --card-1-num: #0891b2;
+  --card-2-bg: linear-gradient(135deg, rgba(240, 253, 250, 0.96) 0%, rgba(204, 251, 241, 0.9) 100%);
+  --card-2-border: #5eead4;
+  --card-2-num: #0d9488;
+  --card-3-bg: linear-gradient(135deg, rgba(240, 249, 255, 0.96) 0%, rgba(224, 242, 254, 0.9) 100%);
+  --card-3-border: #7dd3fc;
+  --card-3-num: #0284c7;
+  --card-4-bg: linear-gradient(135deg, rgba(204, 251, 241, 0.96) 0%, rgba(153, 246, 228, 0.9) 100%);
+  --card-4-border: #2dd4bf;
+  --card-4-num: #0f766e;
+  --card-5-bg: linear-gradient(135deg, rgba(224, 242, 254, 0.96) 0%, rgba(186, 230, 253, 0.9) 100%);
+  --card-5-border: #38bdf8;
+  --card-5-num: #0369a1;
+  --card-6-bg: linear-gradient(135deg, rgba(220, 252, 231, 0.96) 0%, rgba(187, 247, 208, 0.9) 100%);
+  --card-6-border: #86efac;
+  --card-6-num: #15803d;
 }
 
 /* 16. ড্রাগন লাভা */
@@ -1512,6 +1875,24 @@ body {
   background-size: 100% 100%, 100% 100%, 22px 22px, 22px 22px !important;
   border-color: rgba(249, 115, 22, 0.45) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(234, 88, 12, 0.4) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(255, 247, 237, 0.96) 0%, rgba(254, 215, 170, 0.9) 100%);
+  --card-1-border: #fb923c;
+  --card-1-num: #ea580c;
+  --card-2-bg: linear-gradient(135deg, rgba(255, 251, 235, 0.96) 0%, rgba(254, 240, 138, 0.9) 100%);
+  --card-2-border: #fcd34d;
+  --card-2-num: #d97706;
+  --card-3-bg: linear-gradient(135deg, rgba(255, 241, 242, 0.96) 0%, rgba(254, 205, 211, 0.9) 100%);
+  --card-3-border: #fda4af;
+  --card-3-num: #e11d48;
+  --card-4-bg: linear-gradient(135deg, rgba(255, 237, 213, 0.96) 0%, rgba(253, 186, 116, 0.9) 100%);
+  --card-4-border: #fdba74;
+  --card-4-num: #c2410c;
+  --card-5-bg: linear-gradient(135deg, rgba(254, 226, 226, 0.96) 0%, rgba(254, 202, 202, 0.9) 100%);
+  --card-5-border: #fca5a5;
+  --card-5-num: #dc2626;
+  --card-6-bg: linear-gradient(135deg, rgba(254, 243, 199, 0.96) 0%, rgba(253, 224, 71, 0.9) 100%);
+  --card-6-border: #fde047;
+  --card-6-num: #b45309;
 }
 
 /* 17. ডার্ক কার্বন */
@@ -1525,6 +1906,24 @@ body {
   background-position: 0 0, 0 0, 6px 6px !important;
   border-color: rgba(156, 163, 175, 0.35) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 3px rgba(75, 85, 99, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(248, 250, 252, 0.96) 0%, rgba(226, 232, 240, 0.9) 100%);
+  --card-1-border: #cbd5e1;
+  --card-1-num: #334155;
+  --card-2-bg: linear-gradient(135deg, rgba(241, 245, 249, 0.96) 0%, rgba(203, 213, 225, 0.9) 100%);
+  --card-2-border: #94a3b8;
+  --card-2-num: #475569;
+  --card-3-bg: linear-gradient(135deg, rgba(244, 244, 245, 0.96) 0%, rgba(228, 228, 231, 0.9) 100%);
+  --card-3-border: #a1a1aa;
+  --card-3-num: #52525b;
+  --card-4-bg: linear-gradient(135deg, rgba(250, 250, 250, 0.96) 0%, rgba(228, 228, 231, 0.9) 100%);
+  --card-4-border: #d4d4d8;
+  --card-4-num: #3f3f46;
+  --card-5-bg: linear-gradient(135deg, rgba(226, 232, 240, 0.96) 0%, rgba(203, 213, 225, 0.9) 100%);
+  --card-5-border: #94a3b8;
+  --card-5-num: #1e293b;
+  --card-6-bg: linear-gradient(135deg, rgba(243, 244, 246, 0.96) 0%, rgba(229, 231, 235, 0.9) 100%);
+  --card-6-border: #e5e7eb;
+  --card-6-num: #111827;
 }
 
 /* 18. টুইলাইট ব্লুপ্রিন্ট */
@@ -1538,6 +1937,24 @@ body {
   background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px !important;
   border-color: rgba(141, 169, 196, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(19, 64, 116, 0.4) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(239, 246, 255, 0.96) 0%, rgba(219, 234, 254, 0.9) 100%);
+  --card-1-border: #93c5fd;
+  --card-1-num: #1d4ed8;
+  --card-2-bg: linear-gradient(135deg, rgba(240, 249, 255, 0.96) 0%, rgba(224, 242, 254, 0.9) 100%);
+  --card-2-border: #7dd3fc;
+  --card-2-num: #0284c7;
+  --card-3-bg: linear-gradient(135deg, rgba(224, 242, 254, 0.96) 0%, rgba(191, 219, 254, 0.9) 100%);
+  --card-3-border: #60a5fa;
+  --card-3-num: #2563eb;
+  --card-4-bg: linear-gradient(135deg, rgba(236, 254, 255, 0.96) 0%, rgba(207, 250, 254, 0.9) 100%);
+  --card-4-border: #a5f3fc;
+  --card-4-num: #0891b2;
+  --card-5-bg: linear-gradient(135deg, rgba(219, 234, 254, 0.96) 0%, rgba(147, 197, 253, 0.9) 100%);
+  --card-5-border: #3b82f6;
+  --card-5-num: #1e40af;
+  --card-6-bg: linear-gradient(135deg, rgba(248, 250, 252, 0.96) 0%, rgba(226, 232, 240, 0.9) 100%);
+  --card-6-border: #cbd5e1;
+  --card-6-num: #3b82f6;
 }
 
 /* 19. হলো প্রিজম্যাটিক */
@@ -1552,6 +1969,24 @@ body {
   background-size: 100% 100%, 100% 100%, 100% 100%, 22px 22px, 22px 22px !important;
   border-color: rgba(192, 132, 252, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(168, 85, 247, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(253, 242, 248, 0.96) 0%, rgba(251, 207, 232, 0.9) 100%);
+  --card-1-border: #f472b6;
+  --card-1-num: #db2777;
+  --card-2-bg: linear-gradient(135deg, rgba(240, 249, 255, 0.96) 0%, rgba(224, 242, 254, 0.9) 100%);
+  --card-2-border: #7dd3fc;
+  --card-2-num: #0284c7;
+  --card-3-bg: linear-gradient(135deg, rgba(236, 253, 245, 0.96) 0%, rgba(209, 250, 229, 0.9) 100%);
+  --card-3-border: #6ee7b7;
+  --card-3-num: #059669;
+  --card-4-bg: linear-gradient(135deg, rgba(255, 251, 235, 0.96) 0%, rgba(254, 240, 138, 0.9) 100%);
+  --card-4-border: #fcd34d;
+  --card-4-num: #d97706;
+  --card-5-bg: linear-gradient(135deg, rgba(250, 245, 255, 0.96) 0%, rgba(233, 213, 255, 0.9) 100%);
+  --card-5-border: #d8b4fe;
+  --card-5-num: #9333ea;
+  --card-6-bg: linear-gradient(135deg, rgba(255, 241, 242, 0.96) 0%, rgba(254, 205, 211, 0.9) 100%);
+  --card-6-border: #fda4af;
+  --card-6-num: #e11d48;
 }
 
 /* 20. পাইন ফরেস্ট */
@@ -1564,6 +1999,24 @@ body {
   background-size: 100% 100%, 100% 100%, 20px 20px !important;
   border-color: rgba(52, 211, 153, 0.4) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 3px rgba(5, 150, 105, 0.35) !important;
+  --card-1-bg: linear-gradient(135deg, rgba(236, 253, 245, 0.96) 0%, rgba(209, 250, 229, 0.9) 100%);
+  --card-1-border: #6ee7b7;
+  --card-1-num: #047857;
+  --card-2-bg: linear-gradient(135deg, rgba(240, 253, 244, 0.96) 0%, rgba(220, 252, 231, 0.9) 100%);
+  --card-2-border: #86efac;
+  --card-2-num: #15803d;
+  --card-3-bg: linear-gradient(135deg, rgba(247, 254, 231, 0.96) 0%, rgba(236, 252, 203, 0.9) 100%);
+  --card-3-border: #bef264;
+  --card-3-num: #4d7c0f;
+  --card-4-bg: linear-gradient(135deg, rgba(240, 253, 250, 0.96) 0%, rgba(204, 251, 241, 0.9) 100%);
+  --card-4-border: #99f6e4;
+  --card-4-num: #0f766e;
+  --card-5-bg: linear-gradient(135deg, rgba(220, 252, 231, 0.96) 0%, rgba(187, 247, 208, 0.9) 100%);
+  --card-5-border: #4ade80;
+  --card-5-num: #16a34a;
+  --card-6-bg: linear-gradient(135deg, rgba(230, 255, 250, 0.96) 0%, rgba(153, 246, 228, 0.9) 100%);
+  --card-6-border: #5eead4;
+  --card-6-num: #065f46;
 }
 
 /* Mobile responsive full viewport support */

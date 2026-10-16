@@ -595,13 +595,15 @@ function applyBgPreset(presetId) {
 
   currentBgPresetId = presetId;
 
-  // Remove existing preset classes
+  // Remove existing preset classes from both app frame and outer body
   for (let i = 1; i <= 20; i++) {
     appElement.classList.remove(`bg-preset-${i}`);
+    document.body.classList.remove(`body-preset-${i}`);
   }
 
-  // Add selected preset class
+  // Add selected preset class to app frame and outer body
   appElement.classList.add(`bg-preset-${presetId}`);
+  document.body.classList.add(`body-preset-${presetId}`);
 
   // Persist choice to localStorage
   try {
