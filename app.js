@@ -623,6 +623,20 @@ function applyBgPreset(presetId) {
 function openSettingsModal() {
   if (!settingsModalOverlay) return;
   renderPresetsGrid();
+
+  // Sync screenshot button checkbox state
+  const btn = document.getElementById('screenshotBtn');
+  const checkbox = document.getElementById('screenshotToggleCheckbox');
+  const desc = document.getElementById('screenshotToggleDesc');
+  const isVisible = btn ? !btn.classList.contains('is-hidden') : true;
+  if (checkbox) checkbox.checked = isVisible;
+  if (desc) {
+    desc.textContent = isVisible 
+      ? 'বাটন বর্তমানে স্ক্রিনে দৃশ্যমান আছে' 
+      : 'বাটন বর্তমানে স্ক্রিন থেকে লুকানো আছে';
+    desc.style.color = isVisible ? '#86efac' : '#fca5a5';
+  }
+
   settingsModalOverlay.classList.add('active');
 }
 
@@ -659,6 +673,49 @@ window.resetDefaultTheme = resetDefaultTheme;
   }
 })();
 
+// ========================================================
+// 9. SCREENSHOT BUTTON VISIBILITY (SHOW / HIDE TOGGLE)
+// ========================================================
+function toggleScreenshotBtnVisibility(isVisible) {
+  const btn = document.getElementById('screenshotBtn');
+  const checkbox = document.getElementById('screenshotToggleCheckbox');
+  const desc = document.getElementById('screenshotToggleDesc');
 
+  if (btn) {
+    if (isVisible) {
+      btn.classList.remove('is-hidden');
+    } else {
+      btn.classList.add('is-hidden');
+    }
+  }
 
+  if (checkbox) {
+    checkbox.checked = isVisible;
+  }
 
+  if (desc) {
+    desc.textContent = isVisible 
+      ? 'বাটন বর্তমানে স্ক্রিনে দৃশ্যমান আছে' 
+      : 'বাটন বর্তমানে স্ক্রিন থেকে লুকানো আছে';
+    desc.style.color = isVisible ? '#86efac' : '#fca5a5';
+  }
+
+  try {
+    localStorage.setItem('show_screenshot_btn', isVisible ? 'true' : 'false');
+  } catch (e) {
+    console.warn('Could not save screenshot button preference:', e);
+  }
+}
+
+window.toggleScreenshotBtnVisibility = toggleScreenshotBtnVisibility;
+
+// Initialize screenshot button visibility on startup
+(function initScreenshotBtnVisibility() {
+  try {
+    const saved = localStorage.getItem('show_screenshot_btn');
+    const isVisible = saved !== null ? saved === 'true' : true; // Default is visible
+    toggleScreenshotBtnVisibility(isVisible);
+  } catch (e) {
+    toggleScreenshotBtnVisibility(true);
+  }
+})();
