@@ -1,17 +1,19 @@
-const CACHE_NAME = 'lang-app-cache-v2';
+const CACHE_NAME = 'lang-app-cache-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
   './style.css?v=5',
   './app.js',
-  './app.js?v=6',
+  './app.js?v=7',
   './data_hindi.js',
   './data_hindi.js?v=1',
   './data_english.js',
   './data_english.js?v=1',
   './data_chinese.js',
   './data_chinese.js?v=1',
+  './data_arabic.js',
+  './data_arabic.js?v=1',
   './manifest.json',
   './assets/icon-192.png',
   './assets/icon-512.png'

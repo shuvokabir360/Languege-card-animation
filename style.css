@@ -533,6 +533,12 @@ body {
   border-color: rgba(248, 113, 113, 0.9);
 }
 
+/* Card 4: Arabic */
+.card-arabic {
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.96) 0%, rgba(209, 250, 229, 0.92) 100%);
+  border-color: rgba(110, 231, 183, 0.9);
+}
+
 .lang-flag-wrapper {
   display: flex;
   align-items: center;

@@ -94,6 +94,32 @@ const languageData = {
           { id: 5, foreign: "ওয়ো চিয়াও কবির।", bengali: "আমার নাম কবির।" },
           { id: 6, foreign: "রেনশি নি হেন কাওশিং।", bengali: "আপনার সাথে দেখা হয়ে খুব ভালো লাগলো" }
         ]
+  },
+
+  arabic: {
+    title: "আরবি শিখুন",
+    flagSVG: `
+      <span class="flag-icon" title="Saudi Arabia">
+        <svg viewBox="0 0 900 600" width="22" height="15">
+          <rect width="900" height="600" fill="#006C35"/>
+          <path d="M220 380 L680 380 L660 398 L220 398 Z" fill="#FFFFFF"/>
+          <circle cx="235" cy="389" r="12" fill="#FFFFFF"/>
+          <path d="M260 250 Q450 190 640 250 Q450 290 260 250" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round"/>
+          <circle cx="450" cy="245" r="18" fill="#FFFFFF"/>
+        </svg>
+      </span>
+    `,
+    sentences: (typeof arabicSentences !== 'undefined' && Array.isArray(arabicSentences) && arabicSentences.length > 0)
+      ? arabicSentences
+      : [
+          // Fallback if data_arabic.js is not loaded
+          { id: 1, foreign: "আসসালামু আলাইকুম।", bengali: "আপনার ওপর শান্তি বর্ষিত হোক।" },
+          { id: 2, foreign: "মারহাবান! কাইফা হালুক?", bengali: "হ্যালো! আপনি কেমন আছেন?" },
+          { id: 3, foreign: "আনা বিখায়ের, আলহামদুলিল্লাহ।", bengali: "আমি ভালো আছি, আল্লাহর রহমতে।" },
+          { id: 4, foreign: "মা ইসমুক?", bengali: "আপনার নাম কী?" },
+          { id: 5, foreign: "ইসমী কবির।", bengali: "আমার নাম কবির।" },
+          { id: 6, foreign: "শুকরান জাযীলান!", bengali: "আপনাকে অনেক অনেক ধন্যবাদ!" }
+        ]
   }
 };
 
