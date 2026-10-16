@@ -17,13 +17,28 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=12">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700;800;900&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=35">
 </head>
 <body>
   <div class="app-wrapper">
     <main class="mobile-frame" id="app">
       
+      <!-- Perimeter Animated Dotted Lights (চারপাশে ডট ডট লাইট অ্যানিমেশন) -->
+      <svg class="app-perimeter-lights no-screenshot" aria-hidden="true">
+        <defs>
+          <linearGradient id="chasingLightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2dd4bf" />
+            <stop offset="25%" stop-color="#38bdf8" />
+            <stop offset="50%" stop-color="#fbbf24" />
+            <stop offset="75%" stop-color="#f43f5e" />
+            <stop offset="100%" stop-color="#2dd4bf" />
+          </linearGradient>
+        </defs>
+        <rect class="track-dots-rect" x="2" y="2" rx="26" ry="26" />
+        <rect class="chasing-dot-lights" x="2" y="2" rx="26" ry="26" />
+      </svg>
+
       <!-- Pull To Refresh UI Indicator -->
       <div class="pull-refresh-container" id="pullRefreshContainer">
         <div class="pull-refresh-content">
@@ -72,6 +87,30 @@
         </header>
 
         <div class="lang-cards-list">
+          <!-- FEATURED: ছবি দেখে হিন্দী ভাষা শেখা (3D Cartoon Comic Conversations) -->
+          <div class="visual-featured-card" onclick="openVisualLearning()">
+            <div class="visual-card-thumb">
+              <img src="assets/scenes/scene_bus_stand.jpg" alt="ছবি দেখে হিন্দী ভাষা শেখা" class="visual-thumb-img">
+              <span class="visual-sparkle-pill">✨ নতুন সেকশন</span>
+            </div>
+            <div class="visual-card-details">
+              <div class="visual-card-badge-row">
+                <span class="visual-tag">৩D কার্টুন ও ছবি দেখে শেখা</span>
+                <span class="visual-bubble-icon">💬</span>
+              </div>
+              <h2 class="visual-card-title">ছবি দেখে হিন্দী ভাষা শেখা</h2>
+              <p class="visual-card-desc">বাস্তব চরিত্র, ছবি ও সংলাপ বাবল দেখে সহজে হিন্দী কথোপকথন শিখুন</p>
+              <div class="visual-action-row">
+                <span class="visual-start-label">সংলাপ দেখুন</span>
+                <span class="visual-arrow-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
           <!-- 1. Hindi Language Card -->
           <div class="lang-select-card card-hindi" onclick="openLanguage('hindi')">
             <div class="lang-flag-wrapper">
@@ -198,10 +237,12 @@
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
               </svg>
             </button>
-            <h1 class="app-title" id="appTitle">হিন্দী শিখুন</h1>
+            <h1 class="app-title" id="appTitle">
+              <span class="app-title-text" id="appTitleText">হিন্দী ভাষা শিখুন</span><span class="typing-cursor" aria-hidden="true"></span>
+            </h1>
           </div>
           <div class="top-bar-right">
-            <div class="page-badge" id="pageIndicator">পেইজ ১ / ৪</div>
+            <div class="page-badge" id="pageIndicator">১ / ৪</div>
             <button class="top-bar-settings-btn no-screenshot" onclick="openSettingsModal()" title="ব্যাকগ্রাউন্ড ও বাক্য থিম সেটিংস">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="3"></circle>
@@ -218,28 +259,83 @@
           </div>
         </section>
 
-        <!-- Bottom Navigation Controls -->
+        <!-- Bottom Navigation Controls (Colorful Media Icons) -->
         <footer class="bottom-controls">
-          <button class="control-btn prev-btn" id="prevBtn" title="পূর্ববর্তী ৬টি বাক্য">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
+          <button class="control-btn prev-btn" id="prevBtn" title="পূর্ববর্তী">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="19 20 9 12 19 4 19 20"></polygon>
+              <rect x="5" y="4" width="3" height="16" rx="1.2"></rect>
             </svg>
-            <span>পূর্ববর্তী</span>
+            <span class="btn-label" style="display: none;">পূর্ববর্তী</span>
           </button>
 
-          <button class="control-btn play-btn" id="playBtn" title="অটো প্লে">
+          <button class="control-btn play-btn" id="playBtn" title="প্লে / পজ">
             <span class="play-icon" id="playIcon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <polygon points="6 3 20 12 6 21 6 3"></polygon>
               </svg>
             </span>
-            <span id="playText">প্লে</span>
+            <span id="playText" style="display: none;">প্লে</span>
           </button>
 
-          <button class="control-btn next-btn" id="nextBtn" title="পরবর্তী ৬টি বাক্য">
-            <span>পরবর্তী</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6"></polyline>
+          <button class="control-btn next-btn" id="nextBtn" title="পরবর্তী">
+            <span class="btn-label" style="display: none;">পরবর্তী</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 4 15 12 5 20 5 4"></polygon>
+              <rect x="16" y="4" width="3" height="16" rx="1.2"></rect>
+            </svg>
+          </button>
+        </footer>
+      </section>
+
+      <!-- ==============================================
+           3. VISUAL DIALOGUE LEARNING VIEW (ছবি দেখে হিন্দী ভাষা শেখা)
+           ============================================== -->
+      <section class="visual-view" id="visualView" style="display: none;">
+        <!-- Top Bar -->
+        <header class="top-bar visual-top-bar">
+          <div class="brand">
+            <button class="home-nav-btn" onclick="closeVisualView()" title="হোমে ফিরুন">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </button>
+            <h1 class="app-title visual-header-title" id="visualAppTitle">
+              <span class="app-title-text" id="visualTitleText">ছবি দেখে হিন্দী শেখ</span><span class="typing-cursor" aria-hidden="true"></span>
+            </h1>
+          </div>
+          <div class="top-bar-right">
+            <div class="page-badge visual-badge" id="visualSceneBadge">১ / ৩</div>
+          </div>
+        </header>
+
+        <!-- Clean Stage Area: Top Photo + Bottom 2 Dialogues (Zero scrollbars) -->
+        <div class="visual-stage-area">
+          <!-- 1. Top Scene Photo (Clean, unobstructed artwork) -->
+          <div class="visual-photo-box" id="visualPhotoWrapper">
+            <img id="visualSceneImg" src="assets/scenes/scene_bus_stand.jpg" alt="3D Cartoon Scene" class="visual-scene-photo" />
+          </div>
+
+          <!-- 2. Bottom Two Dialogues (Hindi in Bengali script + Bengali translation) -->
+          <div class="visual-dialogues-box" id="visualDialoguesList">
+            <!-- Dynamically populated: Exactly 2 clean cards -->
+          </div>
+        </div>
+
+        <!-- Clean Bottom Navigation (Prev & Next only, voice removed) -->
+        <footer class="bottom-controls visual-bottom-controls">
+          <button class="control-btn prev-btn visual-nav-btn" id="visualPrevBtn" onclick="prevVisualScene()" title="পূর্ববর্তী দৃশ্য">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="19 20 9 12 19 4 19 20"></polygon>
+              <rect x="5" y="4" width="3" height="16" rx="1.2"></rect>
+            </svg>
+          </button>
+
+          <button class="control-btn next-btn visual-nav-btn" id="visualNextBtn" onclick="nextVisualScene()" title="পরবর্তী দৃশ্য">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 4 15 12 5 20 5 4"></polygon>
+              <rect x="16" y="4" width="3" height="16" rx="1.2"></rect>
             </svg>
           </button>
         </footer>
@@ -340,6 +436,7 @@
   <script src="data_english.js?v=1"></script>
   <script src="data_chinese.js?v=1"></script>
   <script src="data_arabic.js?v=1"></script>
-  <script src="app.js?v=14"></script>
+  <script src="visual_scenes.js?v=1"></script>
+  <script src="app.js?v=28"></script>
 </body>
 </html>

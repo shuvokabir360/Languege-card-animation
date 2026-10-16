@@ -1,7 +1,8 @@
 :root {
   --color-white: #ffffff;
   --color-dark: #1e293b;
-  --font-bangla: 'Tiro Bangla', serif;
+  --font-bangla: 'Hind Siliguri', sans-serif;
+  --font-foreign: 'Noto Serif Bengali', serif;
   --font-numeric: 'Roboto', sans-serif;
 }
 
@@ -14,7 +15,7 @@
 
 body {
   font-family: var(--font-bangla);
-  background: linear-gradient(135deg, #13015b 0%, #13004e 50%, #120103 100%);
+  background: radial-gradient(circle at 50% 25%, #032a1f 0%, #011812 55%, #000c09 100%);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -33,25 +34,72 @@ body {
   align-items: center;
 }
 
-/* 9:16 Aspect Ratio Frame - Blue Background with Tile Effect */
+/* 9:16 Aspect Ratio Frame - Dark Forest Emerald Theme */
 .mobile-frame {
   width: 100%;
   aspect-ratio: 9 / 16;
   max-height: 96vh;
-  background-color: #081b3a;
+  background-color: #011710;
   background-image: 
-    radial-gradient(circle at 50% 25%, rgba(29, 78, 216, 0.35) 0%, transparent 70%),
-    linear-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
-  background-size: 100% 100%, 22px 22px, 22px 22px;
+    radial-gradient(circle at 10% 5%, rgba(34, 197, 94, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 90% 5%, rgba(34, 197, 94, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 50% 95%, rgba(5, 150, 105, 0.18) 0%, transparent 60%);
   border-radius: 28px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 
-              0 0 0 3px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 
+              0 0 0 3px rgba(16, 185, 129, 0.25);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(45, 212, 191, 0.35);
+}
+
+/* App Perimeter Animated Dotted Lights (চারপাশে ডট ডট লাইট অ্যানিমেশন) */
+.app-perimeter-lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 90;
+  border-radius: 28px;
+  overflow: visible;
+}
+
+.track-dots-rect {
+  x: 2px;
+  y: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  rx: 26px;
+  ry: 26px;
+  fill: none;
+  stroke: rgba(45, 212, 191, 0.12);
+  stroke-width: 1.5px;
+}
+
+.chasing-dot-lights {
+  x: 2px;
+  y: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  rx: 26px;
+  ry: 26px;
+  fill: none;
+  stroke: url(#chasingLightGrad);
+  stroke-width: 4px;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1px 16px;
+  stroke-dashoffset: 0;
+  animation: runChasingLights 3.2s linear infinite;
+  filter: drop-shadow(0 0 4px #2dd4bf) drop-shadow(0 0 8px #38bdf8);
+}
+
+@keyframes runChasingLights {
+  to {
+    stroke-dashoffset: -160px;
+  }
 }
 
 /* Pull-To-Refresh Indicator */
@@ -116,16 +164,20 @@ body {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* Top Bar: Royal Blue Design with 30px Font Size */
+/* Top Bar: Deep Emerald Pill Design matching reference */
 .top-bar {
-  background: linear-gradient(135deg, #0a3d91 0%, #1565c0 55%, #1e88e5 100%);
-  padding: 12px 16px;
+  background: rgba(3, 38, 30, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin: 10px 10px 4px;
+  padding: 8px 12px;
+  border-radius: 20px;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 18px rgba(13, 71, 161, 0.35);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  border: 1.5px solid rgba(45, 212, 191, 0.4);
   flex-shrink: 0;
   z-index: 10;
 }
@@ -133,45 +185,88 @@ body {
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
-.brand-icon {
-  background: rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(8px);
-  width: 38px;
-  height: 38px;
+.home-nav-btn {
+  width: 36px;
+  height: 36px;
   border-radius: 11px;
+  background: rgba(4, 52, 42, 0.95);
+  border: 1.5px solid #2dd4bf;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Top Bar Title: Exactly 30px Font Size as Requested */
+.home-nav-btn:hover {
+  background: #2dd4bf;
+  color: #021a12;
+  transform: scale(1.05);
+}
+
+/* Top Bar Title: Exactly Styled with Leaf Icon & Typing Cursor */
 .app-title {
-  font-size: 30px !important;
+  font-family: var(--font-bangla);
+  font-size: 26px !important;
   font-weight: 700;
   line-height: 1.1;
-  letter-spacing: 0.5px;
   color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 32px;
+}
+
+.app-title-text {
+  display: inline-block;
+  min-width: 2px;
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 2.5px;
+  height: 22px;
+  background-color: #2dd4bf;
+  margin-left: 2px;
+  border-radius: 1px;
+  animation: blinkCursor 0.75s infinite;
+  vertical-align: middle;
+}
+
+@keyframes blinkCursor {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.app-title::after {
+  content: '🌿';
+  font-size: 18px;
+  display: inline-block;
+  margin-left: 3px;
 }
 
 .page-badge {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(4, 52, 42, 0.95);
   backdrop-filter: blur(8px);
   color: #ffffff;
-  font-size: 0.82rem;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.85rem;
   font-weight: 700;
   padding: 5px 12px;
   border-radius: 20px;
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1.5px solid #2dd4bf;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
 }
 
@@ -182,39 +277,90 @@ body {
 }
 
 .top-bar-settings-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: rgba(4, 52, 42, 0.95);
+  border: 1.5px solid #2dd4bf;
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .top-bar-settings-btn:hover {
-  background: rgba(255, 255, 255, 0.35);
-  transform: rotate(30deg) scale(1.08);
+  background: #2dd4bf;
+  color: #021a12;
+  transform: rotate(30deg) scale(1.05);
 }
 
-/* 6 Sentences Page Container - Evenly Distributed to Fill Full Screen */
+/* Learning View & Full-Page Sweeping Light Effect (এক সাথে পুরো পেইজের ওপর দিয়ে যাবে) */
+.learning-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.learning-view::after {
+  content: '';
+  position: absolute;
+  top: -70%;
+  left: -130%;
+  width: 95%;
+  height: 260%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.01) 20%,
+    rgba(255, 255, 255, 0.08) 42%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0.08) 58%,
+    rgba(255, 255, 255, 0.01) 80%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  z-index: 50;
+  animation: fullPageLightSweep 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes fullPageLightSweep {
+  0% {
+    left: -140%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    left: 160%;
+    opacity: 1;
+  }
+  51%, 100% {
+    left: 160%;
+    opacity: 0;
+  }
+}
+
+/* 7 Sentences Page Container */
 .sentences-page-container {
   flex: 1;
-  padding: 8px 12px;
+  padding: 5px 10px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .sentences-page {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
   min-height: 100%;
 }
 
@@ -223,26 +369,20 @@ body {
   justify-content: space-between;
 }
 
-/* Sentence Card Base (Glossy Glassmorphism Effect) */
+/* Sentence Card Base */
 .sentence-card {
-  border-radius: 14px;
-  padding: 8px 12px;
+  border-radius: 18px;
+  padding: 7px 12px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  border-width: 1.5px;
+  border-width: 2.2px;
   border-style: solid;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.95), 
-              inset 0 -1.5px 2px rgba(0, 0, 0, 0.08), 
-              0 6px 18px rgba(0, 0, 0, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* Glossy Top Sheen Reflection */
+/* Glossy glass curved reflection overlay on top half of card */
 .sentence-card::before {
   content: '';
   position: absolute;
@@ -250,33 +390,41 @@ body {
   left: 0;
   right: 0;
   height: 48%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.02) 100%);
-  border-radius: 13px 13px 0 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(255, 255, 255, 0.08) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 16px 16px 80px 80px / 16px 16px 14px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
 }
 
 .sentence-card:hover {
   transform: translateY(-2px);
-  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 1), 
-              0 10px 24px rgba(0, 0, 0, 0.45);
 }
 
-/* Card Number Pill (Roboto Numeral Font) */
+.card-leaf-art {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.sentence-card:hover .card-leaf-art {
+  opacity: 0.65;
+  transform: translateY(-50%) scale(1.06);
+}
+
+/* Card Number Pill (Hidden as requested) */
 .card-num {
-  font-family: var(--font-numeric);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.08rem;
-  font-weight: 700;
-  flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-  position: relative;
+  display: none !important;
 }
 
 .num-font {
@@ -297,128 +445,188 @@ body {
 
 .sentence-line {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
   min-width: 0;
 }
 
-/* Flag Mini Badges */
+.sentence-foreign-line {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 2px;
+  margin-bottom: 1px;
+}
+
+/* Flag Mini Badges with Brilliant White Light Effect & Synchronized 3D Rotation Animation */
 .flag-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 3px;
+  border-radius: 4px;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-  border: 0.8px solid rgba(0, 0, 0, 0.15);
+  border: 1.2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.85), 0 0 12px rgba(255, 255, 255, 0.5), inset 0 0 2px rgba(255, 255, 255, 0.4);
   line-height: 0;
-  margin-top: 6px;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  will-change: transform, box-shadow;
 }
 
 .flag-icon svg {
   display: block;
+  width: 24px;
+  height: 15px;
 }
 
-/* Sentence Texts: Exactly 24px Font Size with Multi-line Wrapping */
+/* এক দেশের ফ্ল্যাগ অ্যানিমেশন এক সাথে হবে (All Foreign country flags rotate together) */
+.sentence-foreign-line .flag-icon {
+  animation: flagSpin3D 6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  animation-delay: 0s;
+}
+
+/* বাংলাদেশ দেশের ফ্ল্যাগগুলো একসাথে রোটেট করবে (All Bangladesh flags rotate together) */
+.sentence-bengali-line .flag-icon {
+  animation: flagSpin3D 6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  animation-delay: 3s;
+}
+
+@keyframes flagSpin3D {
+  0% {
+    transform: perspective(300px) rotateY(0deg) scale(1);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.85), 0 0 12px rgba(255, 255, 255, 0.5), inset 0 0 2px rgba(255, 255, 255, 0.4);
+  }
+  12% {
+    transform: perspective(300px) rotateY(180deg) scale(1.15);
+    box-shadow: 0 0 14px rgba(255, 255, 255, 1), 0 0 22px rgba(255, 255, 255, 0.85), 0 4px 12px rgba(0, 0, 0, 0.6);
+  }
+  24% {
+    transform: perspective(300px) rotateY(360deg) scale(1);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.85), 0 0 12px rgba(255, 255, 255, 0.5), inset 0 0 2px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    transform: perspective(300px) rotateY(360deg) scale(1);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.85), 0 0 12px rgba(255, 255, 255, 0.5), inset 0 0 2px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Sentence Texts (Clean, crisp text with no blur glow) */
 .hindi-sentence {
-  font-size: 24px !important;
+  font-family: var(--font-bangla), 'Hind Siliguri', sans-serif !important;
+  font-size: 22px !important;
   font-weight: 700;
-  line-height: 1.28;
+  line-height: 1.25;
   white-space: normal;
   word-break: break-word;
   overflow-wrap: break-word;
-  color: #d32f2f !important;
-  /* লাল (Red) */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.2px;
 }
 
 .bengali-sentence {
-  font-size: 24px !important;
+  font-family: var(--font-bangla), 'Hind Siliguri', sans-serif !important;
+  font-size: 21px !important;
   font-weight: 600;
-  line-height: 1.28;
+  line-height: 1.25;
   white-space: normal;
   word-break: break-word;
   overflow-wrap: break-word;
-  color: #1565c0 !important;
-  /* নীল (Blue) */
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.2px;
 }
 
 /* ========================================================
-   5 Distinct Highlighted Glossy Backgrounds for the 5 Sentences
+   7 Botanical Color Themes Matching Reference Screenshot
    ======================================================== */
 
-/* Card 1: Warm Crimson / Rose Gloss (or Theme Matched) */
-.theme-coral {
-  background: var(--card-1-bg, linear-gradient(135deg, rgba(255, 245, 245, 0.95) 0%, rgba(255, 228, 230, 0.88) 100%));
-  border-color: var(--card-1-border, rgba(255, 205, 210, 0.9));
-}
-
-.theme-coral .card-num {
-  background: var(--card-1-num, #d32f2f);
-  color: #ffffff;
-}
-
-/* Card 2: Fresh Emerald / Mint Green Gloss (or Theme Matched) */
+/* Card 1: Green / Lime Theme */
 .theme-emerald {
-  background: var(--card-2-bg, linear-gradient(135deg, rgba(240, 253, 244, 0.95) 0%, rgba(220, 252, 231, 0.88) 100%));
-  border-color: var(--card-2-border, rgba(187, 247, 208, 0.9));
+  background: #021a10 !important;
+  border-color: #22c55e !important;
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.35), inset 0 1.5px 2px rgba(255, 255, 255, 0.35), inset 0 0 18px rgba(0, 0, 0, 0.5) !important;
+  color: #22c55e;
+}
+.theme-emerald .hindi-sentence {
+  color: #facc15 !important; /* Bright Golden Lime */
 }
 
-.theme-emerald .card-num {
-  background: var(--card-2-num, #16a34a);
-  color: #ffffff;
-}
-
-/* Card 3: Deep Royal Blue / Cyan Gloss (or Theme Matched) */
-.theme-blue {
-  background: var(--card-3-bg, linear-gradient(135deg, rgba(239, 246, 255, 0.95) 0%, rgba(219, 234, 254, 0.88) 100%));
-  border-color: var(--card-3-border, rgba(191, 219, 254, 0.9));
-}
-
-.theme-blue .card-num {
-  background: var(--card-3-num, #2563eb);
-  color: #ffffff;
-}
-
-/* Card 4: Warm Honey / Amber Gold Gloss (or Theme Matched) */
+/* Card 2: Orange / Amber Theme */
 .theme-amber {
-  background: var(--card-4-bg, linear-gradient(135deg, rgba(255, 251, 235, 0.95) 0%, rgba(254, 243, 199, 0.88) 100%));
-  border-color: var(--card-4-border, rgba(253, 230, 138, 0.9));
+  background: #1c0d03 !important;
+  border-color: #f97316 !important;
+  box-shadow: 0 0 14px rgba(249, 115, 22, 0.35), inset 0 1.5px 2px rgba(255, 255, 255, 0.35), inset 0 0 18px rgba(0, 0, 0, 0.5) !important;
+  color: #f97316;
+}
+.theme-amber .hindi-sentence {
+  color: #fdba74 !important; /* Bright Warm Golden Orange */
 }
 
-.theme-amber .card-num {
-  background: var(--card-4-num, #d97706);
-  color: #ffffff;
+/* Card 3: Deep Royal Navy Blue Theme */
+.theme-blue {
+  background: #031329 !important;
+  border-color: #0ea5e9 !important;
+  box-shadow: 0 0 14px rgba(14, 165, 233, 0.35), inset 0 1.5px 2px rgba(255, 255, 255, 0.35), inset 0 0 18px rgba(0, 0, 0, 0.5) !important;
+  color: #0ea5e9;
+}
+.theme-blue .hindi-sentence {
+  color: #7dd3fc !important; /* Bright Cyan Sky */
 }
 
-/* Card 5: Royal Violet / Purple Lavender Gloss (or Theme Matched) */
+/* Card 4: Purple / Magenta Theme */
 .theme-purple {
-  background: var(--card-5-bg, linear-gradient(135deg, rgba(250, 245, 255, 0.95) 0%, rgba(243, 232, 255, 0.88) 100%));
-  border-color: var(--card-5-border, rgba(233, 213, 255, 0.9));
+  background: #170426 !important;
+  border-color: #c084fc !important;
+  box-shadow: 0 0 14px rgba(192, 132, 252, 0.35), inset 0 1.5px 2px rgba(255, 255, 255, 0.35), inset 0 0 18px rgba(0, 0, 0, 0.5) !important;
+  color: #c084fc;
+}
+.theme-purple .hindi-sentence {
+  color: #f472b6 !important; /* Bright Pink Rose */
 }
 
-.theme-purple .card-num {
-  background: var(--card-5-num, #9333ea);
-  color: #ffffff;
-}
-
-/* Card 6: Turquoise / Teal Cyan Gloss (or Theme Matched) */
+/* Card 5: Cyan / Aqua Teal Theme */
 .theme-teal {
-  background: var(--card-6-bg, linear-gradient(135deg, rgba(236, 253, 245, 0.95) 0%, rgba(204, 251, 241, 0.88) 100%));
-  border-color: var(--card-6-border, rgba(153, 246, 228, 0.9));
+  background: #021c22 !important;
+  border-color: #06b6d4 !important;
+  box-shadow: 0 0 14px rgba(6, 182, 212, 0.35), inset 0 1.5px 2px rgba(255, 255, 255, 0.35), inset 0 0 18px rgba(0, 0, 0, 0.5) !important;
+  color: #06b6d4;
+}
+.theme-teal .hindi-sentence {
+  color: #67e8f9 !important; /* Bright Aqua Cyan */
 }
 
-.theme-teal .card-num {
-  background: var(--card-6-num, #0d9488);
-  color: #ffffff;
+/* Card 6: Crimson / Red Theme */
+.theme-coral {
+  background: #200408 !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.35), inset 0 1.5px 2px rgba(255, 255, 255, 0.35), inset 0 0 18px rgba(0, 0, 0, 0.5) !important;
+  color: #ef4444;
+}
+.theme-coral .hindi-sentence {
+  color: #fca5a5 !important; /* Bright Peach Red */
+}
+
+/* Card 7: Lime / Olive Green Theme */
+.theme-lime {
+  background: #0a1c03 !important;
+  border-color: #84cc16 !important;
+  box-shadow: 0 0 14px rgba(132, 204, 22, 0.35), inset 0 1.5px 2px rgba(255, 255, 255, 0.35), inset 0 0 18px rgba(0, 0, 0, 0.5) !important;
+  color: #84cc16;
+}
+.theme-lime .hindi-sentence {
+  color: #bef264 !important; /* Bright Lime Yellow */
 }
 
 /* Bottom Controls Section */
+/* Bottom Controls Section (Media Player Style) */
 .bottom-controls {
-  background: rgba(8, 27, 58, 0.94);
-  backdrop-filter: blur(10px);
-  padding: 10px 14px 14px;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: rgba(2, 28, 22, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  margin: 4px 10px 10px;
+  padding: 6px 10px;
+  border-radius: 26px;
+  border: 1.5px solid rgba(45, 212, 191, 0.35);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -427,70 +635,149 @@ body {
 }
 
 .control-btn {
-  font-family: var(--font-bangla);
-  font-size: 1.02rem;
-  font-weight: 700;
   border-radius: 22px;
-  padding: 9px 16px;
+  height: 46px;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  transition: all 0.22s ease;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  padding: 0;
 }
 
+/* Hide text in control buttons as requested */
+.control-btn span:not(.play-icon),
+.control-btn .btn-label {
+  display: none !important;
+}
+
+/* 1. Colorful Previous Button (Vibrant Golden Amber) */
 .prev-btn {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  flex: 1;
+  background: linear-gradient(135deg, rgba(32, 20, 4, 0.95) 0%, rgba(65, 36, 6, 0.9) 100%);
+  color: #fbbf24;
+  border: 1.8px solid #f59e0b;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.prev-btn svg {
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.6));
+  transition: transform 0.2s ease;
 }
 
 .prev-btn:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: linear-gradient(135deg, rgba(48, 30, 6, 0.95) 0%, rgba(85, 45, 8, 0.9) 100%);
+  border-color: #fbbf24;
+  color: #fef08a;
+  transform: scale(1.04);
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.55), inset 0 1px 3px rgba(255, 255, 255, 0.4);
+}
+
+.prev-btn:hover svg {
   transform: translateX(-2px);
 }
 
-.prev-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-  transform: none;
+.prev-btn:active {
+  transform: scale(0.95);
 }
 
+.prev-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: grayscale(0.8);
+}
+
+/* 2. Colorful Play / Pause Button (Neon Emerald Green / Rose Red when playing) */
 .play-btn {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  padding: 9px 14px;
+  flex: 1.25;
+  height: 48px;
+  background: linear-gradient(135deg, rgba(4, 38, 22, 0.95) 0%, rgba(6, 68, 38, 0.9) 100%);
+  color: #22c55e;
+  border: 2px solid #22c55e;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.45), inset 0 1px 3px rgba(255, 255, 255, 0.4);
+}
+
+.play-btn svg {
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.7));
+  transition: transform 0.2s ease;
 }
 
 .play-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(135deg, rgba(6, 55, 32, 0.95) 0%, rgba(10, 90, 50, 0.9) 100%);
+  color: #86efac;
+  border-color: #4ade80;
+  transform: scale(1.05);
+  box-shadow: 0 0 24px rgba(34, 197, 94, 0.7), inset 0 1px 4px rgba(255, 255, 255, 0.5);
 }
 
+.play-btn:active {
+  transform: scale(0.95);
+}
+
+/* Play button when PLAYING / PAUSE state */
 .play-btn.playing {
-  background: #1976d2;
-  color: #ffffff;
-  border-color: #0d47a1;
+  background: linear-gradient(135deg, rgba(48, 6, 16, 0.95) 0%, rgba(85, 12, 30, 0.9) 100%);
+  color: #f43f5e;
+  border-color: #f43f5e;
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.6), inset 0 1px 3px rgba(255, 255, 255, 0.35);
 }
 
+.play-btn.playing svg {
+  filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.8));
+}
+
+.play-btn.playing:hover {
+  background: linear-gradient(135deg, rgba(70, 10, 24, 0.95) 0%, rgba(110, 15, 40, 0.9) 100%);
+  color: #fda4af;
+  border-color: #fb7185;
+  box-shadow: 0 0 26px rgba(244, 63, 94, 0.8);
+}
+
+/* 3. Colorful Next Button (Vivid Cyan Sky Blue) */
 .next-btn {
-  background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   flex: 1;
+  background: linear-gradient(135deg, rgba(3, 32, 54, 0.95) 0%, rgba(7, 55, 88, 0.9) 100%);
+  color: #38bdf8;
+  border: 1.8px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.next-btn svg {
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.6));
+  transition: transform 0.2s ease;
 }
 
 .next-btn:hover {
-  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  background: linear-gradient(135deg, rgba(5, 50, 80, 0.95) 0%, rgba(10, 78, 120, 0.9) 100%);
+  border-color: #7dd3fc;
+  color: #bae6fd;
+  transform: scale(1.04);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.6), inset 0 1px 3px rgba(255, 255, 255, 0.4);
+}
+
+.next-btn:hover svg {
   transform: translateX(2px);
-  box-shadow: 0 6px 16px rgba(21, 101, 192, 0.45);
 }
 
 .next-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.95);
+}
+
+.next-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: grayscale(0.8);
 }
 
 /* Smooth Page Fade/Slide Animation */
@@ -610,26 +897,26 @@ body {
 
 /* Card 1: Hindi */
 .card-hindi {
-  background: linear-gradient(135deg, rgba(255, 241, 242, 0.96) 0%, rgba(254, 226, 226, 0.92) 100%);
-  border-color: rgba(252, 165, 165, 0.9);
+  background: #ffffff !important;
+  border-color: #ef4444;
 }
 
 /* Card 2: English */
 .card-english {
-  background: linear-gradient(135deg, rgba(239, 246, 255, 0.96) 0%, rgba(219, 234, 254, 0.92) 100%);
-  border-color: rgba(147, 197, 253, 0.9);
+  background: #ffffff !important;
+  border-color: #3b82f6;
 }
 
 /* Card 3: Chinese */
 .card-chinese {
-  background: linear-gradient(135deg, rgba(254, 242, 242, 0.96) 0%, rgba(254, 202, 202, 0.92) 100%);
-  border-color: rgba(248, 113, 113, 0.9);
+  background: #ffffff !important;
+  border-color: #dc2626;
 }
 
 /* Card 4: Arabic */
 .card-arabic {
-  background: linear-gradient(135deg, rgba(236, 253, 245, 0.96) 0%, rgba(209, 250, 229, 0.92) 100%);
-  border-color: rgba(110, 231, 183, 0.9);
+  background: #ffffff !important;
+  border-color: #10b981;
 }
 
 .lang-flag-wrapper {
@@ -883,34 +1170,39 @@ body {
   display: none !important; /* Removes distorted pseudo-sheen in html2canvas */
 }
 
-.capturing-screenshot .theme-coral {
-  background: var(--card-1-bg, #fff1f2) !important;
-  border-color: var(--card-1-border, #fecdd3) !important;
-}
-
 .capturing-screenshot .theme-emerald {
-  background: var(--card-2-bg, #f0fdf4) !important;
-  border-color: var(--card-2-border, #bbf7d0) !important;
-}
-
-.capturing-screenshot .theme-blue {
-  background: var(--card-3-bg, #eff6ff) !important;
-  border-color: var(--card-3-border, #bfdbfe) !important;
+  background: #021a10 !important;
+  border-color: #22c55e !important;
 }
 
 .capturing-screenshot .theme-amber {
-  background: var(--card-4-bg, #fffbeb) !important;
-  border-color: var(--card-4-border, #fde68a) !important;
+  background: #1c0d03 !important;
+  border-color: #f97316 !important;
+}
+
+.capturing-screenshot .theme-blue {
+  background: #031329 !important;
+  border-color: #0ea5e9 !important;
 }
 
 .capturing-screenshot .theme-purple {
-  background: var(--card-5-bg, #faf5ff) !important;
-  border-color: var(--card-5-border, #e9d5ff) !important;
+  background: #170426 !important;
+  border-color: #c084fc !important;
 }
 
 .capturing-screenshot .theme-teal {
-  background: var(--card-6-bg, #f0fdfa) !important;
-  border-color: var(--card-6-border, #99f6e4) !important;
+  background: #021c22 !important;
+  border-color: #06b6d4 !important;
+}
+
+.capturing-screenshot .theme-coral {
+  background: #200408 !important;
+  border-color: #ef4444 !important;
+}
+
+.capturing-screenshot .theme-lime {
+  background: #0a1c03 !important;
+  border-color: #84cc16 !important;
 }
 
 /* Home cards clean rendering */
@@ -2159,4 +2451,359 @@ body.body-preset-20 {
     border: none;
     box-shadow: none;
   }
+}
+
+/* ========================================================
+   11. ছবি দেখে হিন্দী ভাষা শেখা (VISUAL COMIC DIALOGUE SECTION)
+   ======================================================== */
+
+/* Home Featured Banner Card */
+.visual-featured-card {
+  background: linear-gradient(135deg, rgba(8, 47, 73, 0.95) 0%, rgba(3, 105, 161, 0.75) 50%, rgba(2, 44, 34, 0.95) 100%);
+  border: 2px solid rgba(56, 189, 248, 0.5);
+  border-radius: 20px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.visual-featured-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: #38bdf8;
+  box-shadow: 0 12px 30px rgba(2, 132, 199, 0.4), inset 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+.visual-featured-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.visual-card-thumb {
+  width: 82px;
+  height: 82px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.visual-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.visual-featured-card:hover .visual-thumb-img {
+  transform: scale(1.08);
+}
+
+.visual-sparkle-pill {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: #f59e0b;
+  color: #000000;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 6px;
+  line-height: 1.1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.visual-card-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.visual-card-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.visual-tag {
+  background: rgba(56, 189, 248, 0.2);
+  color: #7dd3fc;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.visual-bubble-icon {
+  font-size: 15px;
+}
+
+.visual-card-title {
+  font-family: var(--font-bangla);
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.visual-card-desc {
+  font-size: 12px;
+  color: #cbd5e1;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.visual-action-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.visual-start-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.visual-arrow-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #38bdf8;
+  color: #032030;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.visual-featured-card:hover .visual-arrow-circle {
+  transform: translateX(3px);
+}
+
+/* Learning Top Bar Visual Mode Button */
+.top-bar-visual-btn {
+  background: rgba(2, 132, 199, 0.35);
+  border: 1.5px solid #38bdf8;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 18px;
+  font-family: var(--font-bangla);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.top-bar-visual-btn:hover {
+  background: #38bdf8;
+  color: #082f49;
+  transform: scale(1.04);
+}
+
+/* Visual View Container */
+.visual-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #01140e;
+}
+
+.visual-header-title {
+  font-size: 20px !important;
+  display: inline-flex;
+  align-items: center;
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 2.2px;
+  height: 1.15em;
+  background: #38bdf8;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-radius: 1px;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+  animation: typingCursorBlink 0.75s ease-in-out infinite alternate;
+}
+
+@keyframes typingCursorBlink {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.visual-badge {
+  background: rgba(14, 165, 233, 0.3) !important;
+  border: 1px solid #38bdf8 !important;
+  color: #7dd3fc !important;
+}
+
+/* Clean Stage Area: Top Photo + Bottom 2 Dialogues (Strictly No Overflow) */
+.visual-stage-area {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 14px 6px;
+  gap: 10px;
+  overflow: hidden;
+  align-items: center;
+}
+
+/* 1. Top Scene Photo Box (1:1 Square Ratio, Increased Height) */
+.visual-photo-box {
+  flex: 1.18;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+  max-width: 100%;
+  position: relative;
+  background: #021a14;
+  border: 2px solid rgba(45, 212, 191, 0.4);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-shrink: 0;
+}
+
+.visual-scene-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 2. Bottom Two Dialogues Section */
+.visual-dialogues-box {
+  width: 100%;
+  flex: 0.92;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 8px;
+}
+
+.clean-dialogue-card {
+  background: rgba(2, 26, 18, 0.95);
+  border: 1.8px solid rgba(45, 212, 191, 0.35);
+  border-radius: 18px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.clean-dialogue-card.card-speaker-left {
+  border-left: 5px solid #facc15;
+  background: linear-gradient(90deg, rgba(250, 204, 21, 0.1) 0%, rgba(2, 26, 18, 0.97) 100%);
+}
+
+.clean-dialogue-card.card-speaker-right {
+  border-left: 5px solid #38bdf8;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, rgba(2, 26, 18, 0.97) 100%);
+}
+
+.clean-dialogue-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-bangla);
+  font-size: 18px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.card-speaker-left .clean-dialogue-badge {
+  background: rgba(250, 204, 21, 0.22);
+  color: #facc15;
+  border: 2px solid rgba(250, 204, 21, 0.7);
+}
+
+.card-speaker-right .clean-dialogue-badge {
+  background: rgba(56, 189, 248, 0.22);
+  color: #38bdf8;
+  border: 2px solid rgba(56, 189, 248, 0.7);
+}
+
+.clean-dialogue-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clean-hindi-line {
+  font-family: 'Hind Siliguri', 'Noto Serif Bengali', sans-serif;
+  font-size: 18.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.15px;
+}
+
+.card-speaker-left .clean-hindi-line {
+  color: #fde047;
+}
+
+.card-speaker-right .clean-hindi-line {
+  color: #7dd3fc;
+}
+
+.clean-bengali-line {
+  font-family: 'Hind Siliguri', 'Noto Serif Bengali', sans-serif;
+  font-size: 18.5px;
+  font-weight: 700;
+  color: #f8fafc;
+  line-height: 1.35;
+  letter-spacing: 0.15px;
+}
+
+/* Visual Bottom Navigation Controls */
+.visual-bottom-controls {
+  padding: 6px 14px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.visual-bottom-controls .visual-nav-btn {
+  flex: 1;
+  height: 44px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

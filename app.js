@@ -15,7 +15,7 @@ if ('serviceWorker' in navigator) {
 
 const languageData = {
   hindi: {
-    title: "হিন্দী শিখুন",
+    title: "হিন্দী ভাষা শিখুন",
     flagSVG: `
       <span class="flag-icon" title="India">
         <svg viewBox="0 0 900 600" width="22" height="15">
@@ -41,7 +41,7 @@ const languageData = {
   },
 
   english: {
-    title: "ইংরেজি শিখুন",
+    title: "ইংরেজি ভাষা শিখুন",
     flagSVG: `
       <span class="flag-icon" title="UK">
         <svg viewBox="0 0 60 30" width="22" height="15">
@@ -70,7 +70,7 @@ const languageData = {
   },
 
   chinese: {
-    title: "চায়না শিখুন",
+    title: "চায়না ভাষা শিখুন",
     flagSVG: `
       <span class="flag-icon" title="China">
         <svg viewBox="0 0 900 600" width="22" height="15">
@@ -97,7 +97,7 @@ const languageData = {
   },
 
   arabic: {
-    title: "আরবি শিখুন",
+    title: "আরবি ভাষা শিখুন",
     flagSVG: `
       <span class="flag-icon" title="Saudi Arabia">
         <svg viewBox="0 0 900 600" width="22" height="15">
@@ -123,14 +123,15 @@ const languageData = {
   }
 };
 
-// 6 Distinct Glossy Color Themes
+// 7 Distinct Botanical Themes (Matching Exact Order from Screenshot)
 const themes = [
-  "theme-coral",   // 1. Crimson / Rose
-  "theme-emerald", // 2. Fresh Emerald Green
-  "theme-blue",    // 3. Royal Blue
-  "theme-amber",   // 4. Amber / Gold
-  "theme-purple",  // 5. Violet / Lavender
-  "theme-teal"     // 6. Turquoise / Teal
+  "theme-emerald", // 1. Green / Lime
+  "theme-amber",   // 2. Orange / Amber
+  "theme-blue",    // 3. Blue / Cyan
+  "theme-purple",  // 4. Purple / Magenta
+  "theme-teal",    // 5. Cyan / Aqua
+  "theme-coral",   // 6. Red / Crimson
+  "theme-lime"     // 7. Lime / Olive Green
 ];
 
 // Bangladesh SVG Flag
@@ -145,7 +146,7 @@ const bdFlagSVG = `
 
 // App State
 let currentLangKey = 'hindi';
-let itemsPerPage = 6;
+let itemsPerPage = 7;
 let currentPage = 0;
 let isPlaying = false;
 let playInterval = null;
@@ -163,9 +164,89 @@ const playBtn = document.getElementById('playBtn');
 const playIcon = document.getElementById('playIcon');
 const playText = document.getElementById('playText');
 
+// Visual Learning (ছবি দেখে হিন্দী ভাষা শেখা) DOM Elements
+const visualView = document.getElementById('visualView');
+const visualSceneBadge = document.getElementById('visualSceneBadge');
+const visualSceneImg = document.getElementById('visualSceneImg');
+const visualBubblesOverlay = document.getElementById('visualBubblesOverlay');
+const visualTopicPill = document.getElementById('visualTopicPill');
+const visualSceneHeading = document.getElementById('visualSceneHeading');
+const visualDialoguesList = document.getElementById('visualDialoguesList');
+const visualPrevBtn = document.getElementById('visualPrevBtn');
+const visualNextBtn = document.getElementById('visualNextBtn');
+const visualPlayBtn = document.getElementById('visualPlayBtn');
+const visualPlayIcon = document.getElementById('visualPlayIcon');
+const visualPlayText = document.getElementById('visualPlayText');
+
+let currentSceneIndex = 0;
+let isPlayingVisualConversation = false;
+let visualConversationTimeout = null;
+let previousViewBeforeVisual = 'homeView';
+
+
 // ========================================================
 // 2. VIEW SWITCHING (Home <-> Learning)
 // ========================================================
+
+// ========================================================
+// TYPEWRITER EFFECT FOR TOP BAR TITLE (৩ সেকেন্ড পর পর ইফেক্ট)
+// ========================================================
+let titleTypingTimeout = null;
+
+function getBengaliGraphemes(text) {
+  if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+    try {
+      const segmenter = new Intl.Segmenter('bn', { granularity: 'grapheme' });
+      return [...segmenter.segment(text)].map(s => s.segment);
+    } catch (e) {
+      // fallback
+    }
+  }
+  return text.split('');
+}
+
+function startTitleTyping(fullText) {
+  if (titleTypingTimeout) {
+    clearTimeout(titleTypingTimeout);
+    titleTypingTimeout = null;
+  }
+
+  const titleTextEl = document.getElementById('appTitleText') || appTitle;
+  const graphemes = getBengaliGraphemes(fullText);
+  let currentIndex = 0;
+  let isDeleting = false;
+
+  function typeStep() {
+    if (!isDeleting) {
+      // টাইপিং পর্ব (অক্ষর এক এক করে আসবে)
+      currentIndex++;
+      titleTextEl.textContent = graphemes.slice(0, currentIndex).join('');
+
+      if (currentIndex >= graphemes.length) {
+        // সম্পূর্ণ টাইপ হওয়া শেষ - ৩ সেকেন্ড স্থির থাকবে (৩ সেকেন্ড পর পর ইফেক্ট)
+        isDeleting = true;
+        titleTypingTimeout = setTimeout(typeStep, 3000);
+      } else {
+        titleTypingTimeout = setTimeout(typeStep, 110);
+      }
+    } else {
+      // মোছার পর্ব (ব্যাকস্পেস)
+      currentIndex--;
+      titleTextEl.textContent = graphemes.slice(0, currentIndex).join('');
+
+      if (currentIndex <= 0) {
+        // মোছা শেষ - ৫০০ মিলি-সেকেন্ড পর পুনরায় নতুন করে টাইপ শুরু
+        isDeleting = false;
+        titleTypingTimeout = setTimeout(typeStep, 500);
+      } else {
+        titleTypingTimeout = setTimeout(typeStep, 60);
+      }
+    }
+  }
+
+  titleTextEl.textContent = '';
+  typeStep();
+}
 
 function openLanguage(langKey) {
   if (!languageData[langKey]) return;
@@ -174,19 +255,32 @@ function openLanguage(langKey) {
   if (isPlaying) stopAutoPlay();
 
   const langInfo = languageData[langKey];
-  appTitle.textContent = langInfo.title;
+  startTitleTyping(langInfo.title);
 
   homeView.style.display = 'none';
   learningView.style.display = 'flex';
+  learningView.className = `learning-view lang-${langKey}`;
 
   renderPage();
 }
 
 function goToHome() {
   if (isPlaying) stopAutoPlay();
+  if (titleTypingTimeout) {
+    clearTimeout(titleTypingTimeout);
+    titleTypingTimeout = null;
+  }
   learningView.style.display = 'none';
   homeView.style.display = 'flex';
 }
+
+// Initial check to start typing if already on learning view
+setTimeout(() => {
+  if (learningView && window.getComputedStyle(learningView).display !== 'none') {
+    const curTitle = (languageData[currentLangKey] && languageData[currentLangKey].title) || "হিন্দী ভাষা শিখুন";
+    startTitleTyping(curTitle);
+  }
+}, 200);
 
 // ========================================================
 // 3. SENTENCE RENDERING & NAVIGATION
@@ -200,8 +294,8 @@ function renderPage() {
   const startIndex = currentPage * itemsPerPage;
   const currentSentences = allSentences.slice(startIndex, startIndex + itemsPerPage);
 
-  // Update Page Badge
-  pageIndicator.innerHTML = `পেইজ <span class="num-font">${currentPage + 1}</span> / <span class="num-font">${totalPages}</span>`;
+  // Update Page Badge (Numbers only)
+  pageIndicator.innerHTML = `<span class="num-font">${currentPage + 1}</span> / <span class="num-font">${totalPages}</span>`;
 
   // Update Prev Button
   prevBtn.disabled = currentPage === 0;
@@ -227,14 +321,24 @@ function renderPage() {
     card.innerHTML = `
       <div class="card-num">${item.id}</div>
       <div class="card-content">
-        <div class="sentence-line">
+        <div class="sentence-line sentence-foreign-line">
           ${currentLang.flagSVG}
-          <span class="hindi-sentence">${item.foreign}</span>
+          <span class="hindi-sentence lang-${currentLangKey}">${item.foreign}</span>
         </div>
-        <div class="sentence-line">
+        <div class="sentence-line sentence-bengali-line">
           ${bdFlagSVG}
           <span class="bengali-sentence">${item.bengali}</span>
         </div>
+      </div>
+      <div class="card-leaf-art" aria-hidden="true">
+        <svg viewBox="0 0 90 110" width="52" height="66" fill="currentColor">
+          <path d="M15 105 C35 75, 55 45, 75 10" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M75 10 C80 5, 88 5, 85 18 C80 25, 75 20, 75 10 Z"/>
+          <path d="M62 30 C76 25, 88 32, 84 45 C73 48, 62 38, 62 30 Z"/>
+          <path d="M50 45 C38 35, 26 40, 28 52 C38 58, 48 50, 50 45 Z"/>
+          <path d="M42 62 C58 58, 70 66, 65 78 C52 80, 42 70, 42 62 Z"/>
+          <path d="M30 78 C18 68, 8 75, 12 88 C24 92, 30 84, 30 78 Z"/>
+        </svg>
       </div>
     `;
 
@@ -276,11 +380,11 @@ function togglePlay() {
 function startAutoPlay() {
   isPlaying = true;
   playBtn.classList.add('playing');
-  playText.textContent = "পজ";
+  if (playText) playText.textContent = "পজ";
   playIcon.innerHTML = `
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <rect x="6" y="4" width="4" height="16"></rect>
-      <rect x="14" y="4" width="4" height="16"></rect>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <rect x="6" y="4" width="4" height="16" rx="1.5"></rect>
+      <rect x="14" y="4" width="4" height="16" rx="1.5"></rect>
     </svg>
   `;
 
@@ -294,9 +398,9 @@ function stopAutoPlay() {
   clearInterval(playInterval);
   playInterval = null;
   playBtn.classList.remove('playing');
-  playText.textContent = "প্লে";
+  if (playText) playText.textContent = "প্লে";
   playIcon.innerHTML = `
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
       <polygon points="6 3 20 12 6 21 6 3"></polygon>
     </svg>
   `;
@@ -815,4 +919,181 @@ window.updateItemsPerPageUI = updateItemsPerPageUI;
   }
   updateItemsPerPageUI();
 })();
+
+// ========================================================
+// 10. APP PERIMETER DOTTED LIGHTS SYNC
+// ========================================================
+function syncPerimeterLightsSize() {
+  const frame = document.getElementById('app');
+  const rects = document.querySelectorAll('.app-perimeter-lights rect');
+  if (!frame || !rects.length) return;
+  const w = Math.max(frame.clientWidth - 4, 10);
+  const h = Math.max(frame.clientHeight - 4, 10);
+  rects.forEach(r => {
+    r.setAttribute('width', w);
+    r.setAttribute('height', h);
+  });
+}
+window.addEventListener('resize', syncPerimeterLightsSize);
+window.addEventListener('load', syncPerimeterLightsSize);
+if (window.ResizeObserver) {
+  const ro = new ResizeObserver(() => syncPerimeterLightsSize());
+  const appEl = document.getElementById('app');
+  if (appEl) ro.observe(appEl);
+}
+setTimeout(syncPerimeterLightsSize, 150);
+
+// ========================================================
+// 12. ছবি দেখে হিন্দী ভাষা শেখা (VISUAL DIALOGUE CONTROLLER)
+// ========================================================
+
+let visualTitleTypingTimeout = null;
+
+function startVisualTitleTyping(fullText = "ছবি দেখে হিন্দী শেখ") {
+  if (visualTitleTypingTimeout) {
+    clearTimeout(visualTitleTypingTimeout);
+    visualTitleTypingTimeout = null;
+  }
+
+  const titleTextEl = document.getElementById('visualTitleText');
+  if (!titleTextEl) return;
+
+  const graphemes = getBengaliGraphemes(fullText);
+  let currentIndex = 0;
+  let isDeleting = false;
+
+  function typeStep() {
+    if (!isDeleting) {
+      currentIndex++;
+      titleTextEl.textContent = graphemes.slice(0, currentIndex).join('');
+
+      if (currentIndex >= graphemes.length) {
+        isDeleting = true;
+        visualTitleTypingTimeout = setTimeout(typeStep, 3000);
+      } else {
+        visualTitleTypingTimeout = setTimeout(typeStep, 110);
+      }
+    } else {
+      currentIndex--;
+      titleTextEl.textContent = graphemes.slice(0, currentIndex).join('');
+
+      if (currentIndex <= 0) {
+        isDeleting = false;
+        visualTitleTypingTimeout = setTimeout(typeStep, 500);
+      } else {
+        visualTitleTypingTimeout = setTimeout(typeStep, 60);
+      }
+    }
+  }
+
+  titleTextEl.textContent = '';
+  typeStep();
+}
+
+function openVisualLearning() {
+  if (isPlaying) stopAutoPlay();
+  if (titleTypingTimeout) {
+    clearTimeout(titleTypingTimeout);
+    titleTypingTimeout = null;
+  }
+
+  // Record where the user opened from
+  if (learningView && window.getComputedStyle(learningView).display !== 'none') {
+    previousViewBeforeVisual = 'learningView';
+  } else {
+    previousViewBeforeVisual = 'homeView';
+  }
+
+  homeView.style.display = 'none';
+  learningView.style.display = 'none';
+  visualView.style.display = 'flex';
+
+  renderVisualScene();
+  startVisualTitleTyping("ছবি দেখে হিন্দী শেখ");
+}
+
+function closeVisualView() {
+  if (visualTitleTypingTimeout) {
+    clearTimeout(visualTitleTypingTimeout);
+    visualTitleTypingTimeout = null;
+  }
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+  const visualViewEl = document.getElementById('visualView');
+  if (visualViewEl) visualViewEl.style.display = 'none';
+
+  if (previousViewBeforeVisual === 'learningView') {
+    learningView.style.display = 'flex';
+    const curTitle = (languageData[currentLangKey] && languageData[currentLangKey].title) || "হিন্দী ভাষা শিখুন";
+    startTitleTyping(curTitle);
+  } else {
+    homeView.style.display = 'flex';
+  }
+}
+
+function renderVisualScene() {
+  if (typeof visualScenesData === 'undefined' || !visualScenesData.length) return;
+
+  const scene = visualScenesData[currentSceneIndex];
+  if (!scene) return;
+
+  const visualSceneImg = document.getElementById('visualSceneImg');
+  const visualSceneBadge = document.getElementById('visualSceneBadge');
+  const visualPrevBtn = document.getElementById('visualPrevBtn');
+  const visualNextBtn = document.getElementById('visualNextBtn');
+  const visualDialoguesList = document.getElementById('visualDialoguesList');
+
+  // 1. Scene Photo & Badge
+  if (visualSceneImg) visualSceneImg.src = scene.image;
+  if (visualSceneBadge) {
+    visualSceneBadge.innerHTML = `<span class="num-font">${currentSceneIndex + 1}</span> / <span class="num-font">${visualScenesData.length}</span>`;
+  }
+
+  // 2. Navigation buttons state
+  if (visualPrevBtn) visualPrevBtn.disabled = currentSceneIndex === 0;
+  if (visualNextBtn) visualNextBtn.disabled = currentSceneIndex === visualScenesData.length - 1;
+
+  // 3. Render bottom two dialogues (Hindi spoken in Bengali script + Bengali meaning)
+  if (visualDialoguesList) {
+    visualDialoguesList.innerHTML = '';
+    scene.dialogues.forEach((dlg, idx) => {
+      const card = document.createElement('div');
+      const side = dlg.side || (idx === 0 ? 'left' : 'right');
+      card.className = `clean-dialogue-card card-speaker-${side}`;
+      card.id = `dlg-card-${dlg.id}`;
+
+      card.innerHTML = `
+        <div class="clean-dialogue-badge">${idx + 1}</div>
+        <div class="clean-dialogue-content">
+          <div class="clean-hindi-line">${dlg.pronunciation}</div>
+          <div class="clean-bengali-line">${dlg.bengali}</div>
+        </div>
+      `;
+
+      visualDialoguesList.appendChild(card);
+    });
+  }
+}
+
+function nextVisualScene() {
+  if (currentSceneIndex < visualScenesData.length - 1) {
+    currentSceneIndex++;
+    renderVisualScene();
+  }
+}
+
+function prevVisualScene() {
+  if (currentSceneIndex > 0) {
+    currentSceneIndex--;
+    renderVisualScene();
+  }
+}
+
+window.openVisualLearning = openVisualLearning;
+window.closeVisualView = closeVisualView;
+window.nextVisualScene = nextVisualScene;
+window.prevVisualScene = prevVisualScene;
+
+
 
