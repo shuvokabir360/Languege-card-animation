@@ -1,0 +1,672 @@
+:root {
+  --color-white: #ffffff;
+  --color-dark: #1e293b;
+  --font-bangla: 'Tiro Bangla', serif;
+  --font-numeric: 'Roboto', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-bangla);
+  background: linear-gradient(135deg, #13015b 0%, #13004e 50%, #120103 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-dark);
+  overflow-x: hidden;
+  padding: 10px;
+}
+
+/* App Wrapper for Desktop & Responsive Framing */
+.app-wrapper {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 9:16 Aspect Ratio Frame - Blue Background with Tile Effect */
+.mobile-frame {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  max-height: 96vh;
+  background-color: #081b3a;
+  background-image: 
+    radial-gradient(circle at 50% 25%, rgba(29, 78, 216, 0.35) 0%, transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+  background-size: 100% 100%, 22px 22px, 22px 22px;
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 
+              0 0 0 3px rgba(37, 99, 235, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Top Bar: Royal Blue Design with 30px Font Size */
+.top-bar {
+  background: linear-gradient(135deg, #0a3d91 0%, #1565c0 55%, #1e88e5 100%);
+  padding: 12px 16px;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 18px rgba(13, 71, 161, 0.35);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+/* Top Bar Title: Exactly 30px Font Size as Requested */
+.app-title {
+  font-size: 30px !important;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  margin: 0;
+}
+
+.page-badge {
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+/* 6 Sentences Page Container - Evenly Distributed to Fill Full Screen */
+.sentences-page-container {
+  flex: 1;
+  padding: 8px 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sentences-page {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  justify-content: space-between;
+}
+
+/* Sentence Card Base (Glossy Glassmorphism Effect) */
+.sentence-card {
+  border-radius: 14px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-width: 1.5px;
+  border-style: solid;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.95), 
+              inset 0 -1.5px 2px rgba(0, 0, 0, 0.08), 
+              0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glossy Top Sheen Reflection */
+.sentence-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-radius: 13px 13px 0 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sentence-card:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 1), 
+              0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Card Number Pill (Roboto Numeral Font) */
+.card-num {
+  font-family: var(--font-numeric);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.08rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  position: relative;
+}
+
+.num-font {
+  font-family: var(--font-numeric);
+  font-weight: 700;
+}
+
+/* Sentences Content Inside Card */
+.card-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 2;
+  position: relative;
+}
+
+.sentence-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Flag Mini Badges */
+.flag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  border: 0.8px solid rgba(0, 0, 0, 0.15);
+  line-height: 0;
+  margin-top: 6px;
+}
+
+.flag-icon svg {
+  display: block;
+}
+
+/* Sentence Texts: Exactly 24px Font Size with Multi-line Wrapping */
+.hindi-sentence {
+  font-size: 24px !important;
+  font-weight: 700;
+  line-height: 1.28;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  color: #d32f2f !important;
+  /* লাল (Red) */
+}
+
+.bengali-sentence {
+  font-size: 24px !important;
+  font-weight: 600;
+  line-height: 1.28;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  color: #1565c0 !important;
+  /* নীল (Blue) */
+}
+
+/* ========================================================
+   5 Distinct Highlighted Glossy Backgrounds for the 5 Sentences
+   ======================================================== */
+
+/* Card 1: Warm Crimson / Rose Gloss */
+.theme-coral {
+  background: linear-gradient(135deg, rgba(255, 245, 245, 0.95) 0%, rgba(255, 228, 230, 0.88) 100%);
+  border-color: rgba(255, 205, 210, 0.9);
+}
+
+.theme-coral .card-num {
+  background: #d32f2f;
+  color: #ffffff;
+}
+
+/* Card 2: Fresh Emerald / Mint Green Gloss */
+.theme-emerald {
+  background: linear-gradient(135deg, rgba(240, 253, 244, 0.95) 0%, rgba(220, 252, 231, 0.88) 100%);
+  border-color: rgba(187, 247, 208, 0.9);
+}
+
+.theme-emerald .card-num {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+/* Card 3: Deep Royal Blue / Cyan Gloss */
+.theme-blue {
+  background: linear-gradient(135deg, rgba(239, 246, 255, 0.95) 0%, rgba(219, 234, 254, 0.88) 100%);
+  border-color: rgba(191, 219, 254, 0.9);
+}
+
+.theme-blue .card-num {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* Card 4: Warm Honey / Amber Gold Gloss */
+.theme-amber {
+  background: linear-gradient(135deg, rgba(255, 251, 235, 0.95) 0%, rgba(254, 243, 199, 0.88) 100%);
+  border-color: rgba(253, 230, 138, 0.9);
+}
+
+.theme-amber .card-num {
+  background: #d97706;
+  color: #ffffff;
+}
+
+/* Card 5: Royal Violet / Purple Lavender Gloss */
+.theme-purple {
+  background: linear-gradient(135deg, rgba(250, 245, 255, 0.95) 0%, rgba(243, 232, 255, 0.88) 100%);
+  border-color: rgba(233, 213, 255, 0.9);
+}
+
+.theme-purple .card-num {
+  background: #9333ea;
+  color: #ffffff;
+}
+
+/* Card 6: Turquoise / Teal Cyan Gloss */
+.theme-teal {
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.95) 0%, rgba(204, 251, 241, 0.88) 100%);
+  border-color: rgba(153, 246, 228, 0.9);
+}
+
+.theme-teal .card-num {
+  background: #0d9488;
+  color: #ffffff;
+}
+
+/* Bottom Controls Section */
+.bottom-controls {
+  background: rgba(8, 27, 58, 0.94);
+  backdrop-filter: blur(10px);
+  padding: 10px 14px 14px;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.control-btn {
+  font-family: var(--font-bangla);
+  font-size: 1.02rem;
+  font-weight: 700;
+  border-radius: 22px;
+  padding: 9px 16px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.22s ease;
+}
+
+.prev-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+}
+
+.prev-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateX(-2px);
+}
+
+.prev-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.play-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  padding: 9px 14px;
+}
+
+.play-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.play-btn.playing {
+  background: #1976d2;
+  color: #ffffff;
+  border-color: #0d47a1;
+}
+
+.next-btn {
+  background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  flex: 1;
+}
+
+.next-btn:hover {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  transform: translateX(2px);
+  box-shadow: 0 6px 16px rgba(21, 101, 192, 0.45);
+}
+
+.next-btn:active {
+  transform: scale(0.97);
+}
+
+/* Smooth Page Fade/Slide Animation */
+.page-anim {
+  animation: pageSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pageSlide {
+  0% {
+    opacity: 0.3;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================
+   HOME PAGE (Language Selection View)
+   ======================================================== */
+.home-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 24px 18px 20px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.home-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.home-icon-circle {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(30, 136, 229, 0.45) 0%, rgba(13, 71, 161, 0.45) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(21, 101, 192, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.home-badge-pill {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: #93c5fd;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 14px;
+  margin-bottom: 8px;
+}
+
+.home-main-title {
+  font-size: 30px !important;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  margin-bottom: 4px;
+}
+
+.home-subtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.lang-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: auto 0;
+}
+
+.lang-select-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  cursor: pointer;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.3), 
+              0 8px 22px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.lang-select-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.5), 
+              0 14px 28px rgba(0, 0, 0, 0.55);
+}
+
+.lang-select-card:active {
+  transform: scale(0.98);
+}
+
+/* Card 1: Hindi */
+.card-hindi {
+  background: linear-gradient(135deg, rgba(255, 241, 242, 0.96) 0%, rgba(254, 226, 226, 0.92) 100%);
+  border-color: rgba(252, 165, 165, 0.9);
+}
+
+/* Card 2: English */
+.card-english {
+  background: linear-gradient(135deg, rgba(239, 246, 255, 0.96) 0%, rgba(219, 234, 254, 0.92) 100%);
+  border-color: rgba(147, 197, 253, 0.9);
+}
+
+/* Card 3: Chinese */
+.card-chinese {
+  background: linear-gradient(135deg, rgba(254, 242, 242, 0.96) 0%, rgba(254, 202, 202, 0.92) 100%);
+  border-color: rgba(248, 113, 113, 0.9);
+}
+
+.lang-flag-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.lang-card-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lang-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-title {
+  font-size: 24px !important;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.lang-count-tag {
+  background: rgba(30, 41, 59, 0.08);
+  color: #334155;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(30, 41, 59, 0.15);
+}
+
+.lang-desc {
+  font-size: 13.5px;
+  color: #64748b;
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lang-enter-arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e293b;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.lang-select-card:hover .lang-enter-arrow {
+  transform: translateX(3px);
+  color: #2563eb;
+}
+
+.home-footer {
+  text-align: center;
+  padding: 10px 0 6px;
+}
+
+.home-tip {
+  font-size: 12.5px;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+/* Learning View Screen */
+.learning-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.home-nav-btn {
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.home-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.05);
+}
+
+.home-nav-btn:active {
+  transform: scale(0.95);
+}
+
+/* Mobile responsive full viewport support */
+@media (max-width: 480px) {
+  body {
+    padding: 0;
+    background: #f8fafc;
+  }
+
+  .app-wrapper {
+    height: 100vh;
+    max-width: 100%;
+  }
+
+  .mobile-frame {
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
