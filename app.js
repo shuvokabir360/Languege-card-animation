@@ -56,39 +56,17 @@ const languageData = {
         </svg>
       </span>
     `,
-    sentences: [
-      // Page 1: 1 - 6
-      { id: 1, foreign: "Hello, How are you? (হ্যালো, হাউ আর ইউ?)", bengali: "নমস্কার, আপনি কেমন আছেন?" },
-      { id: 2, foreign: "My name is Rahul. (মাই নেম ইজ রাহুল)", bengali: "আমার নাম রাহুল।" },
-      { id: 3, foreign: "Nice to meet you. (নাইস টু মিট ইউ)", bengali: "আপনার সাথে দেখা হয়ে খুব ভালো লাগলো।" },
-      { id: 4, foreign: "What do you do? (হোয়াট ডু ইউ ডু?)", bengali: "আপনি কী কাজ করেন?" },
-      { id: 5, foreign: "Thank you very much. (থ্যাংক ইউ ভেরি মাচ)", bengali: "আপনাকে অনেক অনেক ধন্যবাদ।" },
-      { id: 6, foreign: "I like this very much. (আই লাইক দিস ভেরি মাচ)", bengali: "আমার এটা খুব পছন্দ হয়েছে।" },
-
-      // Page 2: 7 - 12
-      { id: 7, foreign: "Can you help me? (ক্যান ইউ হেল্প মি?)", bengali: "আপনি কি আমাকে সাহায্য করতে পারেন?" },
-      { id: 8, foreign: "How much is this? (হাউ মাচ ইজ দিস?)", bengali: "এটার দাম কত টাকা?" },
-      { id: 9, foreign: "Where do you live? (হোয়ার ডু ইউ লিভ?)", bengali: "আপনি কোথায় থাকেন?" },
-      { id: 10, foreign: "I am very hungry. (আই অ্যাম ভেরি হাংরি)", bengali: "আমার খুব খিদে পেয়েছে।" },
-      { id: 11, foreign: "Would you like some water? (উড ইউ লাইক সাম ওয়াটার?)", bengali: "আপনি কি একটু পানি খাবেন?" },
-      { id: 12, foreign: "May I come in? (মে আই কাম ইন?)", bengali: "আমি কি ভেতরে আসতে পারি?" },
-
-      // Page 3: 13 - 18
-      { id: 13, foreign: "Don't worry, everything is fine. (ডোন্ট ওরি)", bengali: "চিন্তা করবেন না, সব ঠিক আছে।" },
-      { id: 14, foreign: "It was great talking to you. (ইট ওয়াজ গ্রেট)", bengali: "আপনার সাথে কথা বলে ভালো লাগলো।" },
-      { id: 15, foreign: "Please speak slowly. (প্লিজ স্পিক স্লোলি)", bengali: "দয়া করে একটু আস্তে বলুন।" },
-      { id: 16, foreign: "I didn't understand. (আই ডিডন্ট আন্ডারস্ট্যান্ড)", bengali: "আমি এটা বুঝতে পারিনি।" },
-      { id: 17, foreign: "See you soon. (সি ইউ সুন)", bengali: "খুব তাড়াতাড়ি আবার দেখা হবে।" },
-      { id: 18, foreign: "Have a wonderful day. (হ্যাভ আ ওয়ান্ডারফুল ডে)", bengali: "আপনার দিনটি চমৎকার কাটুক।" },
-
-      // Page 4: 19 - 24
-      { id: 19, foreign: "Goodbye, take care. (গুডবাই, টেক কেয়ার)", bengali: "বিদায়, নিজের যত্ন নেবেন।" },
-      { id: 20, foreign: "You are a very kind person. (ইউ আর আ কাইন্ড পারসন)", bengali: "আপনি খুব দয়ালু একজন মানুষ।" },
-      { id: 21, foreign: "What time is it now? (হোয়াট টাইম ইজ ইট নাও?)", bengali: "এখন কয়টা বাজে?" },
-      { id: 22, foreign: "I am so happy today. (আই অ্যাম সো হ্যাপি)", bengali: "আজকে আমি অনেক আনন্দিত।" },
-      { id: 23, foreign: "Have a safe journey. (হ্যাভ আ সেফ জার্নি)", bengali: "আপনার যাত্রা শুভ ও নিরাপদ হোক।" },
-      { id: 24, foreign: "Good night, sweet dreams. (গুড নাইট)", bengali: "শুভ রাত্রি, সুন্দর স্বপ্ন দেখুন।" }
-    ]
+    sentences: (typeof englishSentences !== 'undefined' && Array.isArray(englishSentences) && englishSentences.length > 0)
+      ? englishSentences
+      : [
+          // Fallback if data_english.js is not loaded
+          { id: 1, foreign: "Hello, How are you?", bengali: "নমস্কার, আপনি কেমন আছেন?" },
+          { id: 2, foreign: "My name is Kabir.", bengali: "আমার নাম কবির।" },
+          { id: 3, foreign: "Nice to meet you.", bengali: "আপনার সাথে দেখা হয়ে খুব ভালো লাগলো।" },
+          { id: 4, foreign: "What do you do?", bengali: "আপনি কী কাজ করেন?" },
+          { id: 5, foreign: "Thank you very much.", bengali: "আপনাকে অনেক অনেক ধন্যবাদ।" },
+          { id: 6, foreign: "I like this very much.", bengali: "আমার এটা খুব পছন্দ হয়েছে।" }
+        ]
   },
 
   chinese: {
@@ -105,39 +83,17 @@ const languageData = {
         </svg>
       </span>
     `,
-    sentences: [
-      // Page 1: 1 - 6
-      { id: 1, foreign: "নি হাও (Nǐ hǎo)", bengali: "নমস্কার / হ্যালো" },
-      { id: 2, foreign: "নি হাও মা? (Nǐ hǎo ma?)", bengali: "আপনি কেমন আছেন?" },
-      { id: 3, foreign: "ও হেন হাও, সিয়েসিয়ে (Wǒ hěn hǎo)", bengali: "আমি খুব ভালো আছি, ধন্যবাদ" },
-      { id: 4, foreign: "নি চিয়াও শেনমা মিংজি? (Nǐ jiào shénme?)", bengali: "আপনার নাম কী?" },
-      { id: 5, foreign: "ও ত চিয়াও রাহুল (Wǒ jiào Rahul)", bengali: "আমার নাম রাহুল" },
-      { id: 6, foreign: "রেনশি নি হেন কাওসিং (Rènshí nǐ)", bengali: "আপনার সাথে দেখা হয়ে খুব ভালো লাগলো" },
-
-      // Page 2: 7 - 12
-      { id: 7, foreign: "সিয়ে সিয়ে নি (Xièxiè nǐ)", bengali: "আপনাকে অনেক অনেক ধন্যবাদ" },
-      { id: 8, foreign: "চাই চিয়ান (Zàijiàn)", bengali: "আবার দেখা হবে / বিদায়" },
-      { id: 9, foreign: "চয়ে কা দুওসাও চিয়েন? (Duōshǎo qián?)", bengali: "এটার দাম কত টাকা?" },
-      { id: 10, foreign: "নি চ্যা নালি? (Nǐ zài nǎlǐ?)", bengali: "আপনি এখন কোথায় আছেন?" },
-      { id: 11, foreign: "ও তুজি এও ল (Wǒ dùzi è le)", bengali: "আমার খুব খিদে পেয়েছে" },
-      { id: 12, foreign: "নি ইয়াও হে সুই মা? (Hē shuǐ ma?)", bengali: "আপনি কি পানি পান করবেন?" },
-
-      // Page 3: 13 - 18
-      { id: 13, foreign: "তুই পু ছি (Duìbuqǐ)", bengali: "আমাকে ক্ষমা করবেন / দুঃখিত" },
-      { id: 14, foreign: "মেই কুয়ান সি (Méi guānxi)", bengali: "কোনো ব্যাপার না / ঠিক আছে" },
-      { id: 15, foreign: "ছিং ওয়েন (Qǐngwèn)", bengali: "দয়া করে একটু শুনবেন কি?" },
-      { id: 16, foreign: "ছিং ছুও (Qǐng zuò)", bengali: "দয়া করে বসুন" },
-      { id: 17, foreign: "ও তং ল (Wǒ dǒng le)", bengali: "আমি বুঝতে পেরেছি" },
-      { id: 18, foreign: "ও পু তং (Wǒ bù dǒng)", bengali: "আমি এটা বুঝতে পারিনি" },
-
-      // Page 4: 19 - 24
-      { id: 19, foreign: "ছিং সুও মান ই তিয়ান (Shuō màn)", bengali: "দয়া করে একটু আস্তে কথা বলুন" },
-      { id: 20, foreign: "নি ছেন পাও (Nǐ zhēn bàng)", bengali: "আপনি সত্যি অনেক অসাধারণ" },
-      { id: 21, foreign: "চাও আন (Zǎo'ān)", bengali: "শুভ সকাল" },
-      { id: 22, foreign: "ওয়ান আন (Wǎn'ān)", bengali: "শুভ রাত্রি" },
-      { id: 23, foreign: "চু নি হাও ইউন (Zhù nǐ hǎoyùn)", bengali: "আপনার ভাগ্য সুপ্রসন্ন হোক" },
-      { id: 24, foreign: "পাও চং (Bǎozhòng)", bengali: "নিজের যত্ন নেবেন / ভালো থাকবেন" }
-    ]
+    sentences: (typeof chineseSentences !== 'undefined' && Array.isArray(chineseSentences) && chineseSentences.length > 0)
+      ? chineseSentences
+      : [
+          // Fallback if data_chinese.js is not loaded
+          { id: 1, foreign: "নি হাও!", bengali: "নমস্কার / হ্যালো" },
+          { id: 2, foreign: "নি হাও মা?", bengali: "আপনি কেমন আছেন?" },
+          { id: 3, foreign: "ওয়ো হেন হাও, শিয়ে শিয়ে।", bengali: "আমি খুব ভালো আছি, ধন্যবাদ" },
+          { id: 4, foreign: "নি চিয়াও শেনমা মিংজি?", bengali: "আপনার নাম কী?" },
+          { id: 5, foreign: "ওয়ো চিয়াও কবির।", bengali: "আমার নাম কবির।" },
+          { id: 6, foreign: "রেনশি নি হেন কাওশিং।", bengali: "আপনার সাথে দেখা হয়ে খুব ভালো লাগলো" }
+        ]
   }
 };
 
