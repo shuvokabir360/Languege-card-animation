@@ -18,12 +18,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
   <div class="app-wrapper">
     <main class="mobile-frame" id="app">
       
+      <!-- Pull To Refresh UI Indicator -->
+      <div class="pull-refresh-container" id="pullRefreshContainer">
+        <div class="pull-refresh-content">
+          <div class="pull-refresh-spinner" id="pullRefreshSpinner">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-1.19"/>
+            </svg>
+          </div>
+          <span class="pull-refresh-label" id="pullRefreshLabel">নিচে টানুন রিলোড করতে...</span>
+        </div>
+      </div>
+
       <!-- ==============================================
            1. HOME PAGE VIEW (Language Selection)
            ============================================== -->
@@ -224,6 +236,6 @@
   <script src="data_english.js?v=1"></script>
   <script src="data_chinese.js?v=1"></script>
   <script src="data_arabic.js?v=1"></script>
-  <script src="app.js?v=7"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>

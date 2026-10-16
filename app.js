@@ -346,3 +346,113 @@ window.addEventListener('appinstalled', () => {
   console.log('Language Learning App installed successfully!');
 });
 
+// ========================================================
+// 6. PULL-TO-REFRESH (ট্যাপ করে নিচে টান দিলে রিলোড হবে)
+// ========================================================
+const pullRefreshContainer = document.getElementById('pullRefreshContainer');
+const pullRefreshSpinner = document.getElementById('pullRefreshSpinner');
+const pullRefreshLabel = document.getElementById('pullRefreshLabel');
+const mobileAppFrame = document.getElementById('app');
+
+let touchStartY = 0;
+let touchDiffY = 0;
+let isPulling = false;
+const PULL_THRESHOLD = 65; // px threshold to trigger reload
+
+function getActiveScrollTop() {
+  if (homeView && homeView.style.display !== 'none') {
+    return homeView.scrollTop;
+  }
+  const sentenceContainer = document.querySelector('.sentences-page-container');
+  if (sentenceContainer) {
+    return sentenceContainer.scrollTop;
+  }
+  return window.scrollY || document.documentElement.scrollTop || 0;
+}
+
+function handleTouchStart(e) {
+  if (getActiveScrollTop() <= 2) {
+    const touch = e.touches ? e.touches[0] : e;
+    touchStartY = touch.clientY;
+    isPulling = true;
+  } else {
+    isPulling = false;
+  }
+}
+
+function handleTouchMove(e) {
+  if (!isPulling) return;
+  const touch = e.touches ? e.touches[0] : e;
+  const currentY = touch.clientY;
+  const diff = currentY - touchStartY;
+
+  if (diff > 5 && getActiveScrollTop() <= 2) {
+    // Prevent default screen bounce
+    if (e.cancelable && e.type === 'touchmove') {
+      e.preventDefault();
+    }
+    // Damping formula for realistic resistance
+    touchDiffY = Math.min(diff * 0.45, 90);
+
+    pullRefreshContainer.style.height = `${touchDiffY}px`;
+    pullRefreshContainer.classList.add('visible');
+
+    const rotation = touchDiffY * 4.5;
+    pullRefreshSpinner.style.transform = `rotate(${rotation}deg)`;
+
+    if (touchDiffY >= PULL_THRESHOLD) {
+      pullRefreshLabel.textContent = "ছেড়ে দিন রিলোড হবে...";
+      pullRefreshSpinner.style.color = "#ffffff";
+    } else {
+      pullRefreshLabel.textContent = "নিচে টানুন রিলোড করতে...";
+      pullRefreshSpinner.style.color = "#93c5fd";
+    }
+  } else if (diff < 0) {
+    isPulling = false;
+    resetPullIndicator();
+  }
+}
+
+function handleTouchEnd() {
+  if (!isPulling) return;
+  isPulling = false;
+
+  if (touchDiffY >= PULL_THRESHOLD) {
+    // Trigger reload with animation
+    pullRefreshContainer.style.height = '60px';
+    pullRefreshSpinner.classList.add('spinning');
+    pullRefreshLabel.textContent = "রিলোড হচ্ছে...";
+    
+    // Smooth delay before reload
+    setTimeout(() => {
+      window.location.reload();
+    }, 450);
+  } else {
+    resetPullIndicator();
+  }
+  touchDiffY = 0;
+}
+
+function resetPullIndicator() {
+  pullRefreshContainer.style.height = '0px';
+  pullRefreshContainer.classList.remove('visible');
+  pullRefreshSpinner.classList.remove('spinning');
+  pullRefreshSpinner.style.transform = 'rotate(0deg)';
+  pullRefreshLabel.textContent = "নিচে টানুন রিলোড করতে...";
+}
+
+// Attach Touch & Mouse Drag Listeners to Mobile Frame
+if (mobileAppFrame) {
+  mobileAppFrame.addEventListener('touchstart', handleTouchStart, { passive: true });
+  mobileAppFrame.addEventListener('touchmove', handleTouchMove, { passive: false });
+  mobileAppFrame.addEventListener('touchend', handleTouchEnd);
+
+  // Mouse drag support for desktop testing
+  mobileAppFrame.addEventListener('mousedown', handleTouchStart);
+  window.addEventListener('mousemove', (e) => {
+    if (isPulling) handleTouchMove(e);
+  });
+  window.addEventListener('mouseup', handleTouchEnd);
+}
+
+

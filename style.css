@@ -54,6 +54,68 @@ body {
   border: 2px solid rgba(255, 255, 255, 0.25);
 }
 
+/* Pull-To-Refresh Indicator */
+.pull-refresh-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 100;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(13, 71, 161, 0.95) 0%, rgba(13, 71, 161, 0.75) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: height 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pull-refresh-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: all 0.2s ease;
+}
+
+.pull-refresh-container.visible .pull-refresh-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pull-refresh-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #93c5fd;
+  transition: transform 0.1s ease;
+}
+
+.pull-refresh-spinner.spinning svg {
+  animation: spin-refresh 0.75s linear infinite;
+  color: #60a5fa;
+}
+
+@keyframes spin-refresh {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.pull-refresh-label {
+  font-family: 'Tiro Bangla', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
 /* Top Bar: Royal Blue Design with 30px Font Size */
 .top-bar {
   background: linear-gradient(135deg, #0a3d91 0%, #1565c0 55%, #1e88e5 100%);
