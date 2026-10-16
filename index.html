@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
   <div class="app-wrapper">
@@ -264,13 +264,41 @@
         <div class="settings-modal-card" onclick="event.stopPropagation()">
           <header class="settings-header">
             <div class="settings-title-group">
-              <span class="settings-badge">অ্যাপ থিম</span>
-              <h2 class="settings-modal-title">🎨 ব্যাকগ্রাউন্ড ও ইফেক্ট</h2>
+              <span class="settings-badge">কাস্টমাইজ সেটিংস</span>
+              <h2 class="settings-modal-title">⚙️ অ্যাপ সেটিংস ও থিম</h2>
             </div>
             <button class="settings-close-btn" onclick="closeSettingsModal()" title="বন্ধ করুন">✕</button>
           </header>
+
+          <!-- 1. Sentences Per Page Option -->
+          <div class="settings-option-card">
+            <div class="option-header-row">
+              <div class="option-title-group">
+                <span class="option-icon">📄</span>
+                <div class="toggle-text-col">
+                  <span class="toggle-title">প্রতি পেইজে বাক্য সংখ্যা</span>
+                  <span class="toggle-desc" id="itemsPerPageDesc">বর্তমানে প্রতি পেইজে ৬টি বাক্য প্রদর্শিত হচ্ছে</span>
+                </div>
+              </div>
+              <div class="items-stepper">
+                <button type="button" class="stepper-btn" onclick="stepItemsPerPage(-1)" title="কমান">−</button>
+                <span class="stepper-value" id="itemsPerPageValue">৬</span>
+                <button type="button" class="stepper-btn" onclick="stepItemsPerPage(1)" title="বাড়ান">+</button>
+              </div>
+            </div>
+            
+            <div class="items-pills-row" id="itemsPillsRow">
+              <button type="button" class="items-pill" id="pill-3" onclick="setItemsPerPage(3)">৩</button>
+              <button type="button" class="items-pill" id="pill-4" onclick="setItemsPerPage(4)">৪</button>
+              <button type="button" class="items-pill" id="pill-5" onclick="setItemsPerPage(5)">৫</button>
+              <button type="button" class="items-pill active" id="pill-6" onclick="setItemsPerPage(6)">৬ (ডিফল্ট)</button>
+              <button type="button" class="items-pill" id="pill-7" onclick="setItemsPerPage(7)">৭</button>
+              <button type="button" class="items-pill" id="pill-8" onclick="setItemsPerPage(8)">৮</button>
+              <button type="button" class="items-pill" id="pill-10" onclick="setItemsPerPage(10)">১০</button>
+            </div>
+          </div>
           
-          <!-- Screenshot Button Visibility Toggle Section -->
+          <!-- 2. Screenshot Button Visibility Toggle Section -->
           <div class="settings-toggle-row">
             <div class="toggle-info">
               <span class="toggle-icon">📸</span>
@@ -312,6 +340,6 @@
   <script src="data_english.js?v=1"></script>
   <script src="data_chinese.js?v=1"></script>
   <script src="data_arabic.js?v=1"></script>
-  <script src="app.js?v=13"></script>
+  <script src="app.js?v=14"></script>
 </body>
 </html>

@@ -145,7 +145,7 @@ const bdFlagSVG = `
 
 // App State
 let currentLangKey = 'hindi';
-const ITEMS_PER_PAGE = 6;
+let itemsPerPage = 6;
 let currentPage = 0;
 let isPlaying = false;
 let playInterval = null;
@@ -195,10 +195,10 @@ function goToHome() {
 function renderPage() {
   const currentLang = languageData[currentLangKey];
   const allSentences = currentLang.sentences;
-  const totalPages = Math.ceil(allSentences.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(allSentences.length / itemsPerPage);
 
-  const startIndex = currentPage * ITEMS_PER_PAGE;
-  const currentSentences = allSentences.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const startIndex = currentPage * itemsPerPage;
+  const currentSentences = allSentences.slice(startIndex, startIndex + itemsPerPage);
 
   // Update Page Badge
   pageIndicator.innerHTML = `পেইজ <span class="num-font">${currentPage + 1}</span> / <span class="num-font">${totalPages}</span>`;
@@ -210,6 +210,13 @@ function renderPage() {
   sentencesPage.classList.remove('page-anim');
   void sentencesPage.offsetWidth; // re-flow
   sentencesPage.classList.add('page-anim');
+
+  // Space-evenly layout for 6 or fewer sentences, scrollable for more
+  if (itemsPerPage <= 6) {
+    sentencesPage.classList.add('space-evenly');
+  } else {
+    sentencesPage.classList.remove('space-evenly');
+  }
 
   sentencesPage.innerHTML = '';
   currentSentences.forEach((item, index) => {
@@ -237,7 +244,7 @@ function renderPage() {
 
 function nextPage() {
   const currentLang = languageData[currentLangKey];
-  const totalPages = Math.ceil(currentLang.sentences.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(currentLang.sentences.length / itemsPerPage);
 
   if (currentPage < totalPages - 1) {
     currentPage++;
@@ -625,6 +632,7 @@ function applyBgPreset(presetId) {
 function openSettingsModal() {
   if (!settingsModalOverlay) return;
   renderPresetsGrid();
+  updateItemsPerPageUI();
 
   // Sync screenshot button checkbox state
   const btn = document.getElementById('screenshotBtn');
@@ -721,3 +729,90 @@ window.toggleScreenshotBtnVisibility = toggleScreenshotBtnVisibility;
     toggleScreenshotBtnVisibility(true);
   }
 })();
+
+// ========================================================
+// 10. CONFIGURABLE SENTENCES PER PAGE (৩ থেকে ১০ বাক্য)
+// ========================================================
+function toBengaliNumber(num) {
+  const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return String(num).replace(/[0-9]/g, d => bnDigits[d]);
+}
+
+function updateItemsPerPageUI() {
+  const valEl = document.getElementById('itemsPerPageValue');
+  const descEl = document.getElementById('itemsPerPageDesc');
+  const bnCount = toBengaliNumber(itemsPerPage);
+
+  if (valEl) {
+    valEl.textContent = bnCount;
+  }
+  if (descEl) {
+    descEl.textContent = `বর্তমানে প্রতি পেইজে ${bnCount}টি বাক্য প্রদর্শিত হচ্ছে`;
+  }
+
+  // Update pills active highlight
+  const pills = document.querySelectorAll('.items-pill');
+  pills.forEach(pill => {
+    pill.classList.remove('active');
+  });
+
+  const activePill = document.getElementById(`pill-${itemsPerPage}`);
+  if (activePill) {
+    activePill.classList.add('active');
+  }
+}
+
+function setItemsPerPage(count) {
+  const num = parseInt(count, 10);
+  if (isNaN(num) || num < 2 || num > 15) return;
+  itemsPerPage = num;
+
+  try {
+    localStorage.setItem('app_items_per_page', String(itemsPerPage));
+  } catch (e) {
+    console.warn('Could not save items per page:', e);
+  }
+
+  // Update UI in modal
+  updateItemsPerPageUI();
+
+  // If on learning view, adjust currentPage to stay within bounds and re-render
+  if (learningView && learningView.style.display !== 'none') {
+    const currentLang = languageData[currentLangKey];
+    if (currentLang && currentLang.sentences) {
+      const totalPages = Math.ceil(currentLang.sentences.length / itemsPerPage);
+      if (currentPage >= totalPages) {
+        currentPage = Math.max(0, totalPages - 1);
+      }
+      renderPage();
+    }
+  }
+}
+
+function stepItemsPerPage(delta) {
+  const target = itemsPerPage + delta;
+  if (target >= 2 && target <= 15) {
+    setItemsPerPage(target);
+  }
+}
+
+window.setItemsPerPage = setItemsPerPage;
+window.stepItemsPerPage = stepItemsPerPage;
+window.updateItemsPerPageUI = updateItemsPerPageUI;
+
+// Initialize saved items per page on startup
+(function initItemsPerPage() {
+  try {
+    const saved = localStorage.getItem('app_items_per_page');
+    if (saved) {
+      const parsed = parseInt(saved, 10);
+      if (!isNaN(parsed) && parsed >= 2 && parsed <= 15) {
+        itemsPerPage = parsed;
+      }
+    }
+  } catch (e) {
+    itemsPerPage = 6;
+  }
+  updateItemsPerPageUI();
+})();
+
