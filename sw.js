@@ -1,13 +1,13 @@
-const CACHE_NAME = 'lang-app-cache-v36';
+const CACHE_NAME = 'lang-app-cache-v37';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
   './style.css?v=35',
   './app.js',
-  './app.js?v=28',
+  './app.js?v=29',
   './visual_scenes.js',
-  './visual_scenes.js?v=1',
+  './visual_scenes.js?v=2',
   './assets/scenes/scene_bus_stand.jpg',
   './assets/scenes/scene_fruit_market.jpg',
   './assets/scenes/scene_tea_stall.jpg',
